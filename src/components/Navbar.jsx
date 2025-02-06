@@ -6,6 +6,7 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <Link to="/">Home</Link>
       <Link to="/about">About</Link>
+      <Link to="/Connect">Connection</Link>
     </nav>
   );
 }

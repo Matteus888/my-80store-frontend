@@ -1,0 +1,11 @@
+.main {
+  background-color: lightcyan;
+  width: 100%;
+  min-height: 200vh;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
