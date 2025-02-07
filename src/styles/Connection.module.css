@@ -1,10 +1,23 @@
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
   background-color: lightcyan;
   width: 100%;
-  min-height: 200vh;
+  height: 100%;
 }
 
-.inputContainer {
+.forms {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  margin-top: 40px;
+}
+
+.registerForm,
+.loginForm {
   display: flex;
   flex-direction: column;
   width: 300px;

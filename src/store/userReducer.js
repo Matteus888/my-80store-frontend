@@ -5,6 +5,7 @@ const initialState = {
     firstname: null,
     lastname: null,
     publicId: null,
+    role: null,
   },
 };
 
@@ -16,6 +17,7 @@ export const userSlice = createSlice({
       state.value.firstname = action.payload.firstname;
       state.value.lastname = action.payload.lastname;
       state.value.publicId = action.payload.publicId;
+      state.value.role = action.payload.role;
     },
   },
 });
