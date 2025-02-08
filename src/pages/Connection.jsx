@@ -1,7 +1,7 @@
 import styles from "../styles/Connection.module.css";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { login, logout } from "../store/userReducer";
+import { login } from "../store/userReducer";
 
 export default function Connection() {
   const [firstname, setFirstname] = useState("");
@@ -110,27 +110,11 @@ export default function Connection() {
     }
   };
 
-  const handleLogout = async (e) => {
-    e.preventDefault();
-
-    try {
-      await fetch("http://localhost:3000/users/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-      setTimeout(() => {
-        dispatch(logout());
-      }, 500);
-    } catch (error) {
-      console.error("Signout failed:", error);
-    }
-  };
-
   return (
     <div className={styles.main}>
-      <h2>Connection Page</h2>
       <div className={styles.forms}>
         <div className={styles.registerSection}>
+          <h2>Register</h2>
           <form action="submit" onSubmit={async (e) => e.preventDefault()} className={styles.registerForm}>
             <label htmlFor="firstname">Firstname</label>
             <input
@@ -177,6 +161,7 @@ export default function Connection() {
           </form>
         </div>
         <div className={styles.loginSection}>
+          <h2>Login</h2>
           <form action="submit" onSubmit={async (e) => e.preventDefault()} className={styles.loginForm}>
             <label htmlFor="emailLogin">Email</label>
             <input
@@ -203,11 +188,6 @@ export default function Connection() {
               {errorMessageLog ? errorMessageLog : <span style={{ visibility: "hidden" }}>Invisible</span>}
             </p>
           </form>
-        </div>
-        <div>
-          <button type="submit" onClick={handleLogout}>
-            Logout
-          </button>
         </div>
       </div>
     </div>
