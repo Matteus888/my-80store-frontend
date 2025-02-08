@@ -1,7 +1,7 @@
 import styles from "../styles/Connection.module.css";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../store/userReducer";
+import { login, logout } from "../store/userReducer";
 
 export default function Connection() {
   const [firstname, setFirstname] = useState("");
@@ -110,6 +110,22 @@ export default function Connection() {
     }
   };
 
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    try {
+      await fetch("http://localhost:3000/users/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      setTimeout(() => {
+        dispatch(logout());
+      }, 500);
+    } catch (error) {
+      console.error("Signout failed:", error);
+    }
+  };
+
   return (
     <div className={styles.main}>
       <h2>Connection Page</h2>
@@ -187,6 +203,11 @@ export default function Connection() {
               {errorMessageLog ? errorMessageLog : <span style={{ visibility: "hidden" }}>Invisible</span>}
             </p>
           </form>
+        </div>
+        <div>
+          <button type="submit" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </div>
     </div>
