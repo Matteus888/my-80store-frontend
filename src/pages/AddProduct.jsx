@@ -13,9 +13,22 @@ export default function AddProduct() {
   const nameRef = useRef();
   const descriptionRef = useRef();
   const priceRef = useRef();
-  const categoryRef = useRef();
+  const categoryRef = useRef(null);
   const stockRef = useRef();
   const imageRef = useRef();
+
+  const categories = ["audio", "retro-gaming", "films-and-tv-series", "toys-and-goodies", "fashion", "electronics", "food-and-sweets"];
+
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    setCategory((prevCategory) => {
+      if (checked) {
+        return [...prevCategory, value];
+      } else {
+        return prevCategory.filter((cat) => cat !== value);
+      }
+    });
+  };
 
   const handleAddProduct = async () => {
     if (name.trim() === "") {
@@ -62,24 +75,16 @@ export default function AddProduct() {
     }
   };
 
-  const handleCategoryChange = (e) => {
-    const options = e.target.options;
-    const selectedCategories = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedCategories.push(options[i].value);
-      }
-    }
-    setCategory(selectedCategories);
-  };
-
   return (
     <div className={styles.main}>
-      <h2>AddProduct Page</h2>
       <form action="submit" onSubmit={async (e) => e.preventDefault()} className={styles.form}>
-        <label htmlFor="name">Product Name</label>
+        <label htmlFor="name" className={styles.label}>
+          Product Name
+        </label>
         <input ref={nameRef} type="text" id="name" placeholder="Product Name" value={name} onChange={(e) => setName(e.target.value)} />
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description" className={styles.label}>
+          Description
+        </label>
         <input
           ref={descriptionRef}
           type="text"
@@ -88,29 +93,42 @@ export default function AddProduct() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <label htmlFor="price">Price</label>
+        <label htmlFor="price" className={styles.label}>
+          Price
+        </label>
         <input ref={priceRef} type="number" id="price" placeholder="Price in €" value={price} onChange={(e) => setPrice(e.target.value)} />
-        <label htmlFor="category">Category</label>
-        <select ref={categoryRef} name="category" id="category" value={category} onChange={handleCategoryChange} multiple>
-          <option value="audio">Audio</option>
-          <option value="retro-gaming">Retro Gaming</option>
-          <option value="films-and-tv-series">Films & TV Séries</option>
-          <option value="toys-and-goodies">Toys & Goodies</option>
-          <option value="fashion">Fashion</option>
-          <option value="electronics">Electronics</option>
-          <option value="food-and-sweets">Food & Sweets</option>
-        </select>
-        <label htmlFor="stock">Stock</label>
+        <label htmlFor="category" className={styles.label}>
+          Categories
+        </label>
+        <div id="category" ref={categoryRef} className={styles.categories}>
+          {categories.map((cat) => (
+            <label key={cat} className={styles.category}>
+              <input
+                className={styles.categoryCheckbox}
+                type="checkbox"
+                value={cat}
+                checked={category.includes(cat)}
+                onChange={handleCheckboxChange}
+              />
+              {cat.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())}
+            </label>
+          ))}
+        </div>
+        <label htmlFor="stock" className={styles.label}>
+          Stock
+        </label>
         <input ref={stockRef} type="number" id="stock" placeholder="Stock" value={stock} onChange={(e) => setStock(e.target.value)} />
-        <label htmlFor="image">Image URL</label>
+        <label htmlFor="image" className={styles.label}>
+          Image URL
+        </label>
         <input ref={imageRef} type="text" id="image" placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} />
-        <button type="submit" onClick={handleAddProduct}>
-          Add Product
-        </button>
-        <p className={styles.errorText} role="alert">
-          {errorMessage ? errorMessage : <span style={{ visibility: "hidden" }}>Invisible</span>}
-        </p>
       </form>
+      <button type="submit" onClick={handleAddProduct}>
+        Add Product
+      </button>
+      <p className={styles.errorText} role="alert">
+        {errorMessage ? errorMessage : <span style={{ visibility: "hidden" }}>Invisible</span>}
+      </p>
     </div>
   );
 }

@@ -10,7 +10,7 @@ export default function ProductCard({ imagePath, name, description, price }) {
       <div className={styles.infos}>
         <p className={styles.name}>{name}</p>
         <p className={styles.description}>{description}</p>
-        <p>Price: {price} €</p>
+        <p>Price: {price}€</p>
       </div>
     </div>
   );

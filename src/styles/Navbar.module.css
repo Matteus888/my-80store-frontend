@@ -9,7 +9,11 @@
   height: 60px;
   background-color: aqua;
   font-size: 22px;
-  font-family: 'Lucida Sans', Verdana, sans-serif;
+  font-family: var(--font-rubik), Arial, sans-serif;
   font-weight: 500;
   z-index: 1000;
+}
+
+.iconContainer {
+  cursor: pointer;
 }

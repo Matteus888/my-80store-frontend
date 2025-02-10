@@ -1,6 +1,8 @@
 :root {
   --background: #f3f4f8;
   --foreground: #171717;
+  --font-rubik: Rubik;
+  --font-roboto-mono: 'Roboto Mono';
 }
 
 * {
@@ -13,9 +15,19 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
+  font-family: var(--font-roboto-mono);
 }
 
 body {
   display: flex;
   flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+}
+
+input,
+button {
+  font-family: var(--font-roboto-mono), Arial, sans-serif;
 }

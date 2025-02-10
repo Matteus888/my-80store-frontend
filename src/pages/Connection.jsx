@@ -1,6 +1,7 @@
 import styles from "../styles/Connection.module.css";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { login } from "../store/userReducer";
 
 export default function Connection() {
@@ -12,6 +13,8 @@ export default function Connection() {
   const [passwordLog, setPasswordLog] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errorMessageLog, setErrorMessageLog] = useState("");
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -61,6 +64,11 @@ export default function Connection() {
           dispatch(
             login({ firstname: data.user.firstname, lastname: data.user.lastname, publicId: data.user.publicId, role: data.user.role })
           );
+          setEmail("");
+          setPassword("");
+          setFirstname("");
+          setLastname("");
+          navigate("/");
         } else {
           setErrorMessage("This user already exists");
         }
@@ -102,6 +110,13 @@ export default function Connection() {
           dispatch(
             login({ firstname: data.user.firstname, lastname: data.user.lastname, publicId: data.user.publicId, role: data.user.role })
           );
+          setEmailLog("");
+          setPasswordLog("");
+          if (data.user.role === "admin") {
+            navigate("/addproduct");
+          } else {
+            navigate("/products");
+          }
         }
       } catch (error) {
         console.error("Error during login:", error);
@@ -152,13 +167,13 @@ export default function Connection() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" onClick={handleRegisterSubmit}>
-              Register
-            </button>
-            <p className={styles.errorText} role="alert">
-              {errorMessage ? errorMessage : <span style={{ visibility: "hidden" }}>Invisible</span>}
-            </p>
           </form>
+          <button type="submit" onClick={handleRegisterSubmit}>
+            Register
+          </button>
+          <p className={styles.errorText} role="alert">
+            {errorMessage ? errorMessage : <span style={{ visibility: "hidden" }}>Invisible</span>}
+          </p>
         </div>
         <div className={styles.loginSection}>
           <h2>Login</h2>
@@ -181,13 +196,13 @@ export default function Connection() {
               value={passwordLog}
               onChange={(e) => setPasswordLog(e.target.value)}
             />
-            <button type="submit" onClick={handleLoginSubmit}>
-              Login
-            </button>
-            <p className={styles.errorText} role="alert">
-              {errorMessageLog ? errorMessageLog : <span style={{ visibility: "hidden" }}>Invisible</span>}
-            </p>
           </form>
+          <button type="submit" onClick={handleLoginSubmit}>
+            Login
+          </button>
+          <p className={styles.errorText} role="alert">
+            {errorMessageLog ? errorMessageLog : <span style={{ visibility: "hidden" }}>Invisible</span>}
+          </p>
         </div>
       </div>
     </div>
