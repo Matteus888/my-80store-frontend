@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/userReducer";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ShoppingCartTwoTone, LoginTwoTone, LogoutTwoTone } from "@mui/icons-material";
 
 export default function Navbar() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+
+  const location = useLocation();
 
   const navigate = useNavigate();
 
@@ -44,23 +46,42 @@ export default function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <Link to="/">HOME</Link>
-      <Link to="/products">PRODUCTS</Link>
-      {isAdmin && <Link to="/addproduct">ADD PRODUCT</Link>}
-      <Link to="/about">ABOUT</Link>
+      <Link to="/" className={`${styles.link} ${location.pathname === "/" ? styles.activeLink : ""}`}>
+        HOME
+      </Link>
+      <Link to="/products" className={`${styles.link} ${location.pathname === "/products" ? styles.activeLink : ""}`}>
+        PRODUCTS
+      </Link>
+      {isAdmin && (
+        <Link to="/addproduct" className={`${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
+          ADD PRODUCT
+        </Link>
+      )}
+      <Link to="/about" className={`${styles.link} ${location.pathname === "/about" ? styles.activeLink : ""}`}>
+        ABOUT
+      </Link>
       <div>
         {!isLogged ? (
-          <Link to="/connect" className={styles.iconContainer}>
+          <Link
+            to="/connect"
+            className={`${styles.link} ${location.pathname === "/connect" ? styles.activeLink : ""} ${styles.iconContainer}`}
+          >
             <LoginTwoTone style={{ fontSize: 30 }} />
           </Link>
         ) : (
           <>
             {!isAdmin && (
-              <Link to="/cart" className={styles.iconContainer}>
+              <Link
+                to="/cart"
+                className={`${styles.link} ${location.pathname === "/cart" ? styles.activeLink : ""} ${styles.iconContainer}`}
+              >
                 <ShoppingCartTwoTone style={{ fontSize: 30 }} />
               </Link>
             )}
-            <Link to="/connect" className={styles.iconContainer}>
+            <Link
+              to="/connect"
+              className={`${styles.link} ${location.pathname === "/connect" ? styles.activeLink : ""} ${styles.iconContainer}`}
+            >
               <LogoutTwoTone style={{ fontSize: 30, marginLeft: 15 }} onClick={handleLogout} />
             </Link>
           </>

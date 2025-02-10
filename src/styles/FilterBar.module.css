@@ -1,0 +1,35 @@
+.sideBar {
+  position: sticky;
+  top: 89px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid black;
+  background-color: #f0f0f0;
+  width: 100%;
+  height: 24px;
+  font-size: 13px;
+}
+
+.order {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 100%;
+}
+
+.input {
+  width: 15px;
+  margin: 0;
+}
+
+.label {
+  margin-left: 5px;
+}
