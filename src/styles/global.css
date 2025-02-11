@@ -1,6 +1,17 @@
 :root {
-  --background: #f3f4f8;
-  --foreground: #171717;
+  --background: #f0f0f0;
+  --background-beige: #FCFFE7;
+  --background-grey: #667C92;
+  --foreground: black;
+  --blue: #27f1ff;
+  --blue-hover: #25E3F0;
+  --dark-blue: #0202a2;
+  --green: #9FFF0E;
+  --green-hover: #91E80D;
+  --yellow: #F4F95A;
+  --yellow-hover: #E6EB55;
+  --gray-hover: #DDD;
+  --pink: #FF0CB2;
   --font-rubik: Rubik;
   --font-roboto-mono: 'Roboto Mono';
 }
@@ -9,6 +20,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: url("/normal.cur"), auto;
 }
 
 html,

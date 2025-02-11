@@ -12,6 +12,7 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [filterBtn, setFilterBtn] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
+  const [priceRange, setPriceRange] = useState([0, 1000]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,6 +24,8 @@ export default function Products() {
         if (selectedSort) {
           url += `&sort=${selectedSort}`;
         }
+        url += `&minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}`;
+
         const res = await fetch(url);
         if (res.ok) {
           const data = await res.json();
@@ -34,7 +37,7 @@ export default function Products() {
       }
     };
     fetchProducts();
-  }, [currentPage, selectedCategory, selectedSort]);
+  }, [currentPage, selectedCategory, selectedSort, filterBtn, priceRange]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -47,10 +50,18 @@ export default function Products() {
 
   const handleFilterBtn = () => {
     setFilterBtn(!filterBtn);
+    if (filterBtn) {
+      setSelectedSort(null);
+      setPriceRange([0, 1000]);
+    }
   };
 
   const handleSelectedSort = (sort) => {
     setSelectedSort(sort);
+  };
+
+  const handlePriceChange = (values) => {
+    setPriceRange(values);
   };
 
   const products = productsList.map((product) => (
@@ -65,8 +76,13 @@ export default function Products() {
 
   return (
     <div className={styles.main}>
-      <CategoryBar selectedCategory={selectedCategory} onCategoryClick={handleCategoryClick} onFilterBtn={handleFilterBtn} />
-      {filterBtn && <FilterBar onSelectedSort={handleSelectedSort} />}
+      <CategoryBar
+        selectedCategory={selectedCategory}
+        onCategoryClick={handleCategoryClick}
+        onFilterBtn={handleFilterBtn}
+        filterBtn={filterBtn}
+      />
+      {filterBtn && <FilterBar onSelectedSort={handleSelectedSort} onPriceChange={handlePriceChange} priceRange={priceRange} />}
       <div className={styles.container}>{products}</div>
       <div className={styles.pagination}>
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className={styles.paginationBtn}>

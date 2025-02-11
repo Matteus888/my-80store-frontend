@@ -1,0 +1,31 @@
+import styles from "../styles/ConfirmationModal.module.css";
+import PropTypes from "prop-types";
+
+export default function ConfirmationModal({ title, content, btnTxt, onPressBtn, onCloseModal }) {
+  return (
+    <div className={styles.modalOverlay}>
+      <div className={styles.modal}>
+        <div className={styles.title}>
+          <span>{title}</span>
+          <div className={`${styles.closeBtn} ${styles.btn}`} onClick={onCloseModal}>
+            X
+          </div>
+        </div>
+        <div className={styles.content}>{content}</div>
+        <div className={styles.btnContainer}>
+          <button className={styles.btn} onClick={onPressBtn}>
+            {btnTxt}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ConfirmationModal.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  btnTxt: PropTypes.string.isRequired,
+  onPressBtn: PropTypes.func,
+  onCloseModal: PropTypes.func,
+};

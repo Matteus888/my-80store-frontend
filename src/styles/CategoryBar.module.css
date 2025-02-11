@@ -1,35 +1,48 @@
 .categoryBar {
   position: sticky;
-  top: 49px;
+  top: 49.5px;
   width: 100%;
-  height: 40px;
+  height: 42px;
   display: flex;
   justify-content: center;
-  background-color: #f0f0f0;
-  border-top: 1px solid black;
+  align-items: center;
+  background-color: var(--background);
+  border-bottom: 1px solid black;
 }
 
 .categoryBtn {
-  width: 150px;
-  height: 100%;
-  background-color: #f0f0f0;
-  border: none;
-  padding: 0 15px;
-  margin: 0;
+  width: 140px;
+  height: 35px;
+  background-color: var(--background);
+  border: 2px solid black;
+  border-top-color: white;
+  border-left-color: white;
+  box-shadow: inset -1px -1px black, inset 1px 1px white;
+  padding: 0 5px;
+  margin: 0 5px;
   cursor: pointer;
+  font-size: 12px;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #ddd;
+    background-color: var(--gray-hover);
+  }
+
+  &:active {
+    border-top-color: black;
+    border-left-color: black;
+    border-right-color: white;
+    border-bottom-color: white;
+    box-shadow: inset 1px 1px black, inset -1px -1px white;
   }
 }
 
 .activeCategory {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--green);
+  transition: background-color 0.3s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--green-hover);
   }
 }
 
@@ -37,14 +50,37 @@
   position: absolute;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: 50px;
+  height: 36px;
   top: 2px;
   right: 40px;
   font-size: 10px;
   cursor: pointer;
+  border: 2px solid black;
+  border-top-color: white;
+  border-left-color: white;
+  box-shadow: inset -1px -1px black, inset 1px 1px white;
+  transition: background-color 0.3s;
 
   &:active {
-    background-color: #007bff;
-    color: white;
+    border-top-color: black;
+    border-left-color: black;
+    border-right-color: white;
+    border-bottom-color: white;
+    box-shadow: inset 1px 1px black, inset -1px -1px white;
+  }
+
+  &:hover {
+    background-color: var(--gray-hover);
+  }
+}
+
+.activeFilter {
+  background-color: var(--yellow);
+
+  &:hover {
+    background-color: var(--yellow-hover);
   }
 }

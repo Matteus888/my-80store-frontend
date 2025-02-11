@@ -2,7 +2,7 @@ import styles from "../styles/CategoryBar.module.css";
 import PropTypes from "prop-types";
 import { TuneTwoTone } from "@mui/icons-material";
 
-export default function CategoryBar({ selectedCategory, onCategoryClick, onFilterBtn }) {
+export default function CategoryBar({ selectedCategory, onCategoryClick, onFilterBtn, filterBtn }) {
   const categories = ["audio", "retro-gaming", "films-and-tv-series", "toys-and-goodies", "fashion", "electronics", "food-and-sweets"];
 
   const formatCategoryName = (category) => {
@@ -29,9 +29,9 @@ export default function CategoryBar({ selectedCategory, onCategoryClick, onFilte
           {formatCategoryName(category)}
         </button>
       ))}
-      <div className={styles.filterBtn} onClick={() => onFilterBtn()}>
-        <TuneTwoTone style={{ fontSize: 20 }} />
-        <p>Filter</p>
+      <div className={`${styles.filterBtn} ${filterBtn ? styles.activeFilter : ""}`} onClick={() => onFilterBtn()}>
+        <TuneTwoTone style={{ fontSize: 18 }} />
+        {!filterBtn ? <p>Filter</p> : <p>Reset</p>}
       </div>
     </div>
   );
@@ -41,4 +41,5 @@ CategoryBar.propTypes = {
   selectedCategory: PropTypes.string,
   onCategoryClick: PropTypes.func.isRequired,
   onFilterBtn: PropTypes.func.isRequired,
+  filterBtn: PropTypes.bool.isRequired,
 };
