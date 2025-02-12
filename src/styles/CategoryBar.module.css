@@ -11,14 +11,15 @@
 }
 
 .categoryBtn {
-  width: 140px;
-  height: 35px;
+  display: flex;
+  width: auto;
+  height: auto;
   background-color: var(--background);
   border: 2px solid black;
   border-top-color: white;
   border-left-color: white;
   box-shadow: inset -1px -1px black, inset 1px 1px white;
-  padding: 0 5px;
+  padding: 8px 6px;
   margin: 0 5px;
   cursor: pointer;
   font-size: 12px;
@@ -46,35 +47,8 @@
   }
 }
 
-.filterBtn {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 36px;
-  top: 2px;
-  right: 40px;
-  font-size: 10px;
-  cursor: pointer;
-  border: 2px solid black;
-  border-top-color: white;
-  border-left-color: white;
-  box-shadow: inset -1px -1px black, inset 1px 1px white;
-  transition: background-color 0.3s;
-
-  &:active {
-    border-top-color: black;
-    border-left-color: black;
-    border-right-color: white;
-    border-bottom-color: white;
-    box-shadow: inset 1px 1px black, inset -1px -1px white;
-  }
-
-  &:hover {
-    background-color: var(--gray-hover);
-  }
+.filterButton {
+  width: 88px;
 }
 
 .activeFilter {

@@ -29,9 +29,9 @@ export default function CategoryBar({ selectedCategory, onCategoryClick, onFilte
           {formatCategoryName(category)}
         </button>
       ))}
-      <div className={`${styles.filterBtn} ${filterBtn ? styles.activeFilter : ""}`} onClick={() => onFilterBtn()}>
-        <TuneTwoTone style={{ fontSize: 18 }} />
-        {!filterBtn ? <p>Filter</p> : <p>Reset</p>}
+      <div className={`${styles.categoryBtn} ${styles.filterButton} ${filterBtn ? styles.activeFilter : ""}`} onClick={() => onFilterBtn()}>
+        <TuneTwoTone style={{ fontSize: 16, marginRight: 5 }} />
+        {!filterBtn ? <p>Filters</p> : <p>Reset</p>}
       </div>
     </div>
   );

@@ -4,21 +4,65 @@
   align-items: center;
   width: 100%;
   height: calc(100% - 210px);
-  background-color: lightsalmon;
 }
 
 .form {
   display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.left,
+.right {
+  width: 40%;
+}
+
+.inputContainer {
+  display: flex;
   flex-direction: column;
-  margin-top: 40px;
-  gap: 10px;
-  width: 400px;
-  height: 100%;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .label {
   font-size: 20px;
   font-weight: 600;
+}
+
+.input {
+  padding: 4px 8px;
+  height: auto;
+  border: 2px solid #808080;
+  outline: none;
+  background-color: var(--background);
+  color: black;
+  font-size: 12px;
+  box-shadow: inset -2px -2px 0px white, inset 2px 2px 0px black;
+
+  &:focus {
+    border: 2px solid red;
+    background-color: white;
+  }
+
+  &:hover {
+    cursor: text;
+  }
+}
+
+.numSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.numInput {
+  width: 80%;
+}
+
+.stockContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
 
 .categories {
@@ -40,6 +84,71 @@
   margin: 0 5px 0 0;
 }
 
-.errorText {
-  color: red;
+.imageInputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageInputDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.imageInput {
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.imagePreview {
+  width: 150px;
+  margin: 15px 0 5px;
+  border: 2px solid black;
+}
+
+.button {
+  display: flex;
+  width: auto;
+  height: auto;
+  background-color: var(--background);
+  border: 2px solid black;
+  border-top-color: white;
+  border-left-color: white;
+  box-shadow: inset -1px -1px black, inset 1px 1px white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: var(--gray-hover);
+  }
+
+  &:active {
+    border-top-color: black;
+    border-left-color: black;
+    border-right-color: white;
+    border-bottom-color: white;
+    box-shadow: inset 1px 1px black, inset -1px -1px white;
+  }
+}
+
+.deleteBtn {
+  font-size: 16px;
+  padding: 2px 5px;
+  height: 26px;
+}
+
+.addPicBtn {
+  margin-top: 10px;
+  width: 40%;
+  padding: 4px 15px;
+  text-align: center;
+}
+
+.addProductBtn {
+  font-size: 16px;
+  margin-top: 30px;
+  padding: 2px 15px 4px 15px;
+}
+
+.errorAlert {
+  margin: 15px 0;
 }

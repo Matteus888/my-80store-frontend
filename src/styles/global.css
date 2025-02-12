@@ -1,7 +1,7 @@
 :root {
   --background: #f0f0f0;
   --background-beige: #FCFFE7;
-  --background-grey: #667C92;
+  --background-grey: #97acc0;
   --foreground: black;
   --blue: #27f1ff;
   --blue-hover: #25E3F0;
@@ -28,6 +28,7 @@ body {
   height: 100%;
   overflow-x: hidden;
   font-family: var(--font-roboto-mono);
+  background-color: var(--background-grey);
 }
 
 body {

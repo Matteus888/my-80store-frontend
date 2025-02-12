@@ -1,4 +1,5 @@
 import styles from "../styles/Connection.module.css";
+import Alert from "../components/Alert";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -129,10 +130,13 @@ export default function Connection() {
     <div className={styles.main}>
       <div className={styles.forms}>
         <div className={styles.registerSection}>
-          <h2>Register</h2>
+          <h2>Create count</h2>
           <form action="submit" onSubmit={async (e) => e.preventDefault()} className={styles.registerForm}>
-            <label htmlFor="firstname">Firstname</label>
+            <label className={styles.label} htmlFor="firstname">
+              Firstname
+            </label>
             <input
+              className={styles.input}
               ref={firstnameRef}
               type="text"
               id="firstname"
@@ -140,8 +144,11 @@ export default function Connection() {
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
             />
-            <label htmlFor="lastname">Lastname</label>
+            <label className={styles.label} htmlFor="lastname">
+              Lastname
+            </label>
             <input
+              className={styles.input}
               ref={lastnameRef}
               type="text"
               id="lastname"
@@ -149,8 +156,11 @@ export default function Connection() {
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
             />
-            <label htmlFor="emailRegister">Email</label>
+            <label className={styles.label} htmlFor="emailRegister">
+              Email
+            </label>
             <input
+              className={styles.input}
               ref={emailRef}
               type="email"
               id="emailRegister"
@@ -158,8 +168,11 @@ export default function Connection() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <label htmlFor="passwordRegister">Password</label>
+            <label className={styles.label} htmlFor="passwordRegister">
+              Password
+            </label>
             <input
+              className={styles.input}
               ref={passwordRef}
               type="password"
               id="passwordRegister"
@@ -168,18 +181,25 @@ export default function Connection() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </form>
-          <button type="submit" onClick={handleRegisterSubmit}>
+          <button className={styles.button} type="submit" onClick={handleRegisterSubmit}>
             Register
           </button>
-          <p className={styles.errorText} role="alert">
-            {errorMessage ? errorMessage : <span style={{ visibility: "hidden" }}>Invisible</span>}
+          <p className={styles.errorAlert} role="alert">
+            {errorMessage ? (
+              <Alert title="Alert" onClose={() => setErrorMessage("")} content={errorMessage} />
+            ) : (
+              <span style={{ visibility: "hidden" }}>Invisible</span>
+            )}
           </p>
         </div>
         <div className={styles.loginSection}>
-          <h2>Login</h2>
+          <h2>Connect</h2>
           <form action="submit" onSubmit={async (e) => e.preventDefault()} className={styles.loginForm}>
-            <label htmlFor="emailLogin">Email</label>
+            <label className={styles.label} htmlFor="emailLogin">
+              Email
+            </label>
             <input
+              className={styles.input}
               ref={emailLogRef}
               type="email"
               id="emailLogin"
@@ -187,8 +207,11 @@ export default function Connection() {
               value={emailLog}
               onChange={(e) => setEmailLog(e.target.value)}
             />
-            <label htmlFor="passwordLogin">Password</label>
+            <label className={styles.label} htmlFor="passwordLogin">
+              Password
+            </label>
             <input
+              className={styles.input}
               ref={passwordLogRef}
               type="password"
               id="passwordLogin"
@@ -197,12 +220,16 @@ export default function Connection() {
               onChange={(e) => setPasswordLog(e.target.value)}
             />
           </form>
-          <button type="submit" onClick={handleLoginSubmit}>
+          <button className={styles.button} type="submit" onClick={handleLoginSubmit}>
             Login
           </button>
-          <p className={styles.errorText} role="alert">
-            {errorMessageLog ? errorMessageLog : <span style={{ visibility: "hidden" }}>Invisible</span>}
-          </p>
+          <div className={styles.errorAlert}>
+            {errorMessageLog ? (
+              <Alert title="Alert" onClose={() => setErrorMessageLog("")} content={errorMessageLog} />
+            ) : (
+              <span style={{ visibility: "hidden" }}>Invisible</span>
+            )}
+          </div>
         </div>
       </div>
     </div>

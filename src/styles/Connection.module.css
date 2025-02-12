@@ -2,25 +2,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
-  background-color: lightcyan;
   width: 100%;
-  height: calc(100vh - 210px);
+  height: calc(100vh - 200px);
 }
 
 .forms {
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  width: 90%;
-  margin-top: 40px;
+  align-items: flex-start;
+  width: 95%;
+  height: 100%;
+  margin-top: 20px;
 }
 
 .registerSection,
 .loginSection {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .registerForm,
@@ -30,25 +29,58 @@
   width: 300px;
 }
 
-h2 {
-  margin-bottom: 20px;
-}
-
-input {
-  width: 100%;
-  height: 30px;
-  margin-bottom: 10px;
-  padding-left: 5px;
-  border: none;
-  border-bottom: 1px solid black;
-}
-
-button {
-  width: 100px;
-  height: 30px;
+.label {
   margin-top: 10px;
 }
 
-.errorText {
-  color: red;
+.input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 2px solid #808080;
+  outline: none;
+  background-color: var(--background);
+  color: black;
+  font-size: 12px;
+  box-shadow: inset -2px -2px 0px white, inset 2px 2px 0px black;
+
+  &:focus {
+    border: 2px solid red;
+    background-color: white;
+  }
+
+  &:hover {
+    cursor: text;
+  }
+}
+
+.button {
+  display: flex;
+  width: auto;
+  height: auto;
+  background-color: var(--background);
+  border: 2px solid black;
+  border-top-color: white;
+  border-left-color: white;
+  box-shadow: inset -1px -1px black, inset 1px 1px white;
+  padding: 2px 15px 4px 15px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: var(--gray-hover);
+  }
+
+  &:active {
+    border-top-color: black;
+    border-left-color: black;
+    border-right-color: white;
+    border-bottom-color: white;
+    box-shadow: inset 1px 1px black, inset -1px -1px white;
+  }
+}
+
+.errorAlert {
+  margin-top: 15px;
 }

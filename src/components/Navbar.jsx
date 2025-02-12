@@ -49,20 +49,22 @@ export default function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <Link to="/" className={`${styles.link} ${location.pathname === "/" ? styles.activeLink : ""}`}>
-        HOME
-      </Link>
-      <Link to="/products" className={`${styles.link} ${location.pathname === "/products" ? styles.activeLink : ""}`}>
-        PRODUCTS
-      </Link>
-      {isAdmin && (
-        <Link to="/addproduct" className={`${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
-          ADD PRODUCT
+      <div className={styles.navSection}>
+        <Link to="/" className={`${styles.link} ${location.pathname === "/" ? styles.activeLink : ""}`}>
+          Home
         </Link>
-      )}
-      <Link to="/about" className={`${styles.link} ${location.pathname === "/about" ? styles.activeLink : ""}`}>
-        ABOUT
-      </Link>
+        <Link to="/products" className={`${styles.link} ${location.pathname === "/products" ? styles.activeLink : ""}`}>
+          Products
+        </Link>
+        {isAdmin && (
+          <Link to="/addproduct" className={`${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
+            Add Product
+          </Link>
+        )}
+        <Link to="/about" className={`${styles.link} ${location.pathname === "/about" ? styles.activeLink : ""}`}>
+          About
+        </Link>
+      </div>
       <div className={styles.iconSection}>
         {!isLogged ? (
           <Link
