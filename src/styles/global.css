@@ -20,7 +20,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: url("/normal.cur"), auto;
 }
 
 html,
@@ -34,6 +33,7 @@ body {
 body {
   display: flex;
   flex-direction: column;
+  cursor: url("/normal.cur"), auto;
 }
 
 a {

@@ -12,7 +12,7 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [filterBtn, setFilterBtn] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [priceRange, setPriceRange] = useState([0, 500]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -52,7 +52,7 @@ export default function Products() {
     setFilterBtn(!filterBtn);
     if (filterBtn) {
       setSelectedSort(null);
-      setPriceRange([0, 1000]);
+      setPriceRange([0, 500]);
     }
   };
 
@@ -67,8 +67,9 @@ export default function Products() {
   const products = productsList.map((product) => (
     <ProductCard
       key={product.slug}
-      imagePath={product.imageUrl}
+      imageUrls={product.imageUrls}
       name={product.name}
+      brand={product.brand}
       description={product.description || "No description available"}
       price={product.price}
     />

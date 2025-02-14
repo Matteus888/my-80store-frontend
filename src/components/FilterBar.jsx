@@ -36,7 +36,7 @@ export default function FilterBar({ onSelectedSort, onPriceChange, priceRange })
         <Slider
           className={styles.slider}
           min={0}
-          max={1000}
+          max={500}
           value={priceRange}
           onChange={handlePriceChange}
           renderThumb={(props, state) => (

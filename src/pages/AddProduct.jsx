@@ -7,6 +7,7 @@ import { DeleteForever } from "@mui/icons-material";
 
 export default function AddProduct() {
   const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState([]);
@@ -19,13 +20,14 @@ export default function AddProduct() {
   const user = useSelector((state) => state.user.value);
 
   const nameRef = useRef();
+  const brandRef = useRef();
   const descriptionRef = useRef();
   const priceRef = useRef();
   const stockRef = useRef();
   const categoryRef = useRef(null);
   const imageRef = useRef();
 
-  const categories = ["audio", "retro-gaming", "films-and-tv-series", "toys-and-goodies", "fashion", "electronics", "food-and-sweets"];
+  const categories = ["audio", "retro-gaming", "films-and-tv-series", "toys-and-goodies", "fashion", "electronics"];
 
   useEffect(() => {
     if (!user.role || user.role !== "admin") {
@@ -64,6 +66,10 @@ export default function AddProduct() {
       setErrorMessage("Please enter the product name");
       nameRef.current.focus();
       return;
+    } else if (brand.trim() === "") {
+      setErrorMessage("Please enter the product brand");
+      brandRef.current.focus();
+      return;
     } else if (description.trim() === "") {
       setErrorMessage("Please enter the product description");
       descriptionRef.current.focus();
@@ -92,10 +98,17 @@ export default function AddProduct() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
-          body: JSON.stringify({ name, description, price, category, stock, imageUrls: images.filter((img) => img.trim() !== "") }),
+          body: JSON.stringify({ name, brand, description, price, category, stock, imageUrls: images.filter((img) => img.trim() !== "") }),
         });
         if (res.ok) {
           const data = await res.json();
+          setName("");
+          setBrand("");
+          setDescription("");
+          setPrice(0);
+          setStock(0);
+          setCategory([]);
+          setImages([""]);
           console.log(data);
         }
       } catch (error) {
@@ -120,6 +133,20 @@ export default function AddProduct() {
               placeholder="Product Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <label htmlFor="brand" className={styles.label}>
+              Brand
+            </label>
+            <input
+              className={styles.input}
+              ref={brandRef}
+              type="text"
+              id="brand"
+              placeholder="Brand"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
             />
           </div>
           <div className={styles.inputContainer}>

@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 
 export default function Alert({ title, onClose, content }) {
   return (
-    <div className={styles.main}>
-      <div className={styles.title}>
-        <span>{title}</span>
-        <div className={styles.closeBtn} onClick={onClose}>
-          X
+    <div className={styles.overlay}>
+      <div className={styles.main}>
+        <div className={styles.title}>
+          <span>{title}</span>
+          <div className={styles.closeBtn} onClick={onClose}>
+            X
+          </div>
         </div>
+        <div className={styles.content}>{content}</div>
       </div>
-      <div className={styles.content}>{content}</div>
     </div>
   );
 }

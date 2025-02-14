@@ -176,7 +176,7 @@ export default function Connection() {
               ref={passwordRef}
               type="password"
               id="passwordRegister"
-              placeholder="Enter your password"
+              placeholder="Enter a password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -185,11 +185,7 @@ export default function Connection() {
             Register
           </button>
           <p className={styles.errorAlert} role="alert">
-            {errorMessage ? (
-              <Alert title="Alert" onClose={() => setErrorMessage("")} content={errorMessage} />
-            ) : (
-              <span style={{ visibility: "hidden" }}>Invisible</span>
-            )}
+            {errorMessage && <Alert title="Alert" onClose={() => setErrorMessage("")} content={errorMessage} />}
           </p>
         </div>
         <div className={styles.loginSection}>
@@ -224,11 +220,7 @@ export default function Connection() {
             Login
           </button>
           <div className={styles.errorAlert}>
-            {errorMessageLog ? (
-              <Alert title="Alert" onClose={() => setErrorMessageLog("")} content={errorMessageLog} />
-            ) : (
-              <span style={{ visibility: "hidden" }}>Invisible</span>
-            )}
+            {errorMessageLog && <Alert title="Alert" onClose={() => setErrorMessageLog("")} content={errorMessageLog} />}
           </div>
         </div>
       </div>

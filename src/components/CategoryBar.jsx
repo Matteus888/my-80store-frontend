@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { TuneTwoTone } from "@mui/icons-material";
 
 export default function CategoryBar({ selectedCategory, onCategoryClick, onFilterBtn, filterBtn }) {
-  const categories = ["audio", "retro-gaming", "films-and-tv-series", "toys-and-goodies", "fashion", "electronics", "food-and-sweets"];
+  const categories = ["audio", "retro-gaming", "films-and-tv-series", "toys-and-goodies", "fashion", "electronics"];
 
   const formatCategoryName = (category) => {
     return category

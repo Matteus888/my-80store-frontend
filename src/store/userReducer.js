@@ -6,6 +6,7 @@ const initialState = {
     lastname: null,
     publicId: null,
     role: null,
+    expiresAt: null,
   },
 };
 
@@ -18,12 +19,14 @@ export const userSlice = createSlice({
       state.value.lastname = action.payload.lastname;
       state.value.publicId = action.payload.publicId;
       state.value.role = action.payload.role;
+      state.value.expiresAt = Date.now() + 24 * 60 * 60 * 1000; // 1 jour
     },
     logout: (state) => {
       state.value.firstname = null;
       state.value.lastname = null;
       state.value.publicId = null;
       state.value.role = null;
+      state.value.expiresAt = null;
     },
   },
 });
