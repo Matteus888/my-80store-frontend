@@ -9,6 +9,7 @@ import Connection from "./pages/Connection";
 import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
 import Profile from "./pages/Profile";
+import Product from "./pages/Product";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 
@@ -35,6 +36,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/product/:slug" element={<Product />} />
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />

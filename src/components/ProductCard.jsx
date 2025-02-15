@@ -1,8 +1,9 @@
 import styles from "../styles/ProductCard.module.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function ProductCard({ imageUrls, name, brand, description, price }) {
+export default function ProductCard({ imageUrls, name, brand, description, price, slug }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const limitedDescription = description && description.length > 110 ? description.slice(0, 110) + "..." : description;
@@ -27,7 +28,9 @@ export default function ProductCard({ imageUrls, name, brand, description, price
         &gt;
       </button>
       <div className={styles.infos}>
-        <p className={styles.name}>{name}</p>
+        <Link to={`/product/${slug}`} className={styles.name}>
+          {name}
+        </Link>
         <p className={styles.brand}>{brand}</p>
         <p className={styles.description}>{limitedDescription}</p>
         <p className={styles.price}>Price: {price}€</p>
@@ -42,4 +45,5 @@ ProductCard.propTypes = {
   brand: PropTypes.string.isRequired,
   description: PropTypes.string,
   price: PropTypes.number.isRequired,
+  slug: PropTypes.string.isRequired,
 };

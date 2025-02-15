@@ -17,7 +17,7 @@ export default function Products() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let url = `http://localhost:3000/products?page=${currentPage}&limit=9`;
+        let url = `http://localhost:3000/products?page=${currentPage}&limit=10`;
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;
         }
@@ -72,6 +72,7 @@ export default function Products() {
       brand={product.brand}
       description={product.description || "No description available"}
       price={product.price}
+      slug={product.slug}
     />
   ));
 
