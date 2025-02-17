@@ -30,23 +30,6 @@
   padding: 5px 15px;
   color: black;
   font-family: var(--font-roboto), Arial, sans-serif;
-  border: 2px solid black;
-  border-top-color: white;
-  border-left-color: white;
-  box-shadow: inset -1px -1px black, inset 1px 1px white;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: var(--gray-hover);
-  }
-
-  &:active {
-    border-top-color: black;
-    border-left-color: black;
-    border-right-color: white;
-    border-bottom-color: white;
-    box-shadow: inset 1px 1px black, inset -1px -1px white;
-  }
 }
 
 .activeLink {
@@ -97,34 +80,15 @@
   font-size: 16px;
   text-align: center;
   padding-bottom: 8px;
-  /* margin-bottom: 3px; */
   border-bottom: 1px solid black;
 }
 
 .dropdownBtn {
-  border: 2px solid black;
-  border-top-color: white;
-  border-left-color: white;
-  box-shadow: inset -1px -1px black, inset 1px 1px white;
   width: 100%;
   padding: 8px;
   text-align: left;
-  cursor: pointer;
   font-size: 14px;
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: var(--gray-hover);
-  }
-
-  &:active {
-    border-top-color: black;
-    border-left-color: black;
-    border-right-color: white;
-    border-bottom-color: white;
-    box-shadow: inset 1px 1px black, inset -1px -1px white;
-  }
 }

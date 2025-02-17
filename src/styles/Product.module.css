@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* height: 100%; */
   border: 1px solid black;
 }
 
@@ -37,6 +36,12 @@
   height: 100%;
   object-fit: contain;
   opacity: 0.5;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
 }
 
 .active {
@@ -54,8 +59,8 @@
   height: 100%;
   object-fit: contain;
   border: 1px solid black;
-}
 
-.textSection {
-  /* padding: 0 10px; */
+  &:hover {
+    cursor: zoom-in;
+  }
 }

@@ -16,7 +16,7 @@ export default function CategoryBar({ selectedCategory, onCategoryClick, onFilte
     <div className={styles.categoryBar}>
       <button
         onClick={() => onCategoryClick(null)}
-        className={`${styles.categoryBtn} ${selectedCategory === null ? styles.activeCategory : ""}`}
+        className={`btn ${styles.categoryBtn} ${selectedCategory === null ? styles.activeCategory : ""}`}
       >
         All
       </button>
@@ -24,12 +24,15 @@ export default function CategoryBar({ selectedCategory, onCategoryClick, onFilte
         <button
           key={category}
           onClick={() => onCategoryClick(category)}
-          className={`${styles.categoryBtn} ${selectedCategory === category ? styles.activeCategory : ""}`}
+          className={`btn ${styles.categoryBtn} ${selectedCategory === category ? styles.activeCategory : ""}`}
         >
           {formatCategoryName(category)}
         </button>
       ))}
-      <div className={`${styles.categoryBtn} ${styles.filterButton} ${filterBtn ? styles.activeFilter : ""}`} onClick={() => onFilterBtn()}>
+      <div
+        className={`btn ${styles.categoryBtn} ${styles.filterButton} ${filterBtn ? styles.activeFilter : ""}`}
+        onClick={() => onFilterBtn()}
+      >
         <TuneTwoTone style={{ fontSize: 16, marginRight: 5 }} />
         {!filterBtn ? <p>Filters</p> : <p>Reset</p>}
       </div>

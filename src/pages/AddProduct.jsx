@@ -233,19 +233,19 @@ export default function AddProduct() {
                     value={img}
                     onChange={(e) => handleImageChange(index, e.target.value)}
                   />
-                  <div className={`${styles.button} ${styles.deleteBtn}`}>
+                  <div className={`btn ${styles.button} ${styles.deleteBtn}`}>
                     <DeleteForever onClick={() => removeImageField(index)} style={{ color: "red", fontSize: "18px" }} />
                   </div>
                 </div>
               </div>
             ))}
-            <button type="button" onClick={addImageField} className={`${styles.button} ${styles.addPicBtn}`}>
+            <button type="button" onClick={addImageField} className={`btn ${styles.button} ${styles.addPicBtn}`}>
               + Add a picture
             </button>
           </div>
         </div>
       </form>
-      <button type="submit" onClick={handleAddProduct} className={`${styles.button} ${styles.addProductBtn}`}>
+      <button type="submit" onClick={handleAddProduct} className={`btn ${styles.button} ${styles.addProductBtn}`}>
         Add Product
       </button>
       <div className={styles.errorAlert}>

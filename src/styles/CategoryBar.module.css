@@ -16,27 +16,9 @@
   width: auto;
   height: auto;
   background-color: var(--background);
-  border: 2px solid black;
-  border-top-color: white;
-  border-left-color: white;
-  box-shadow: inset -1px -1px black, inset 1px 1px white;
   padding: 8px 6px;
   margin: 0 5px;
-  cursor: pointer;
   font-size: 12px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: var(--gray-hover);
-  }
-
-  &:active {
-    border-top-color: black;
-    border-left-color: black;
-    border-right-color: white;
-    border-bottom-color: white;
-    box-shadow: inset 1px 1px black, inset -1px -1px white;
-  }
 }
 
 .activeCategory {

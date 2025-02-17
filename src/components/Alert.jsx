@@ -7,7 +7,7 @@ export default function Alert({ title, onClose, content }) {
       <div className={styles.main}>
         <div className={styles.title}>
           <span>{title}</span>
-          <div className={styles.closeBtn} onClick={onClose}>
+          <div className="btn closeBtn" onClick={onClose}>
             X
           </div>
         </div>

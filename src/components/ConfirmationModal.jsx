@@ -7,13 +7,13 @@ export default function ConfirmationModal({ title, content, btnTxt, onPressBtn, 
       <div className={styles.modal}>
         <div className={styles.title}>
           <span>{title}</span>
-          <div className={`${styles.closeBtn} ${styles.btn}`} onClick={onCloseModal}>
+          <div className="btn closeBtn" onClick={onCloseModal}>
             X
           </div>
         </div>
         <div className={styles.content}>{content}</div>
         <div className={styles.btnContainer}>
-          <button className={styles.btn} onClick={onPressBtn}>
+          <button className={`btn ${styles.yesBtn}`} onClick={onPressBtn}>
             {btnTxt}
           </button>
         </div>

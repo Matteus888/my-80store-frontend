@@ -42,30 +42,30 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navSection}>
-        <Link to="/" className={`${styles.link} ${location.pathname === "/" ? styles.activeLink : ""}`}>
+        <Link to="/" className={`btn ${styles.link} ${location.pathname === "/" ? styles.activeLink : ""}`}>
           Home
         </Link>
-        <Link to="/products" className={`${styles.link} ${location.pathname === "/products" ? styles.activeLink : ""}`}>
+        <Link to="/products" className={`btn ${styles.link} ${location.pathname === "/products" ? styles.activeLink : ""}`}>
           Products
         </Link>
         {isAdmin && (
-          <Link to="/addproduct" className={`${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
+          <Link to="/addproduct" className={`btn ${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
             Add Product
           </Link>
         )}
-        <Link to="/about" className={`${styles.link} ${location.pathname === "/about" ? styles.activeLink : ""}`}>
+        <Link to="/about" className={`btn ${styles.link} ${location.pathname === "/about" ? styles.activeLink : ""}`}>
           About
         </Link>
       </div>
       <div className={styles.iconSection}>
-        <Link to="/cart" className={`${styles.link} ${location.pathname === "/cart" ? styles.activeLink : ""} ${styles.iconContainer}`}>
+        <Link to="/cart" className={`btn ${styles.link} ${location.pathname === "/cart" ? styles.activeLink : ""} ${styles.iconContainer}`}>
           <ShoppingCartTwoTone style={{ fontSize: 18 }} />
           <p className={styles.iconText}>Cart</p>
         </Link>
         {!isLogged ? (
           <Link
             to="/connect"
-            className={`${styles.link} ${location.pathname === "/connect" ? styles.activeLink : ""} ${styles.iconContainer}`}
+            className={`btn ${styles.link} ${location.pathname === "/connect" ? styles.activeLink : ""} ${styles.iconContainer}`}
           >
             <SentimentSatisfiedAltTwoTone style={{ fontSize: 18 }} />
             <p className={styles.iconText}>Login</p>
@@ -78,7 +78,7 @@ export default function Navbar() {
           >
             <button
               to="/profile"
-              className={`${styles.link} ${location.pathname === "/profile" ? styles.activeLink : ""} ${styles.iconContainer}`}
+              className={`btn ${styles.link} ${location.pathname === "/profile" ? styles.activeLink : ""} ${styles.iconContainer}`}
             >
               <SentimentSatisfiedAltTwoTone style={{ fontSize: 18 }} />
               <p className={styles.iconText}>Profile</p>
@@ -86,15 +86,15 @@ export default function Navbar() {
             {isProfileMenuOpen && (
               <div className={styles.dropdownMenu}>
                 <p className={styles.dropdownTxt}>Welcome {user.firstname}</p>
-                <Link to="/profile" className={styles.dropdownBtn}>
+                <Link to="/profile" className={`btn ${styles.dropdownBtn}`}>
                   <SettingsTwoTone style={{ fontSize: 18 }} />
                   My account
                 </Link>
-                <Link to="/purchase" className={styles.dropdownBtn}>
+                <Link to="/purchase" className={`btn ${styles.dropdownBtn}`}>
                   <ShopTwoTwoTone style={{ fontSize: 18 }} />
                   My purchases
                 </Link>
-                <button className={styles.dropdownBtn} onClick={handleClickLogout}>
+                <button className={`btn ${styles.dropdownBtn}`} onClick={handleClickLogout}>
                   <LogoutTwoTone style={{ fontSize: 18 }} />
                   Disconnect
                 </button>

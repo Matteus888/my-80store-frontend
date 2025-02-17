@@ -181,7 +181,7 @@ export default function Connection() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </form>
-          <button className={styles.button} type="submit" onClick={handleRegisterSubmit}>
+          <button className={`btn ${styles.button}`} type="submit" onClick={handleRegisterSubmit}>
             Register
           </button>
           <p className={styles.errorAlert} role="alert">
@@ -216,7 +216,7 @@ export default function Connection() {
               onChange={(e) => setPasswordLog(e.target.value)}
             />
           </form>
-          <button className={styles.button} type="submit" onClick={handleLoginSubmit}>
+          <button className={`btn ${styles.button}`} type="submit" onClick={handleLoginSubmit}>
             Login
           </button>
           <div className={styles.errorAlert}>

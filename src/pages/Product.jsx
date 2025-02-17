@@ -1,12 +1,14 @@
 import styles from "../styles/Product.module.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import ImageModal from "../components/ImageModal";
 
 export default function Product() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   const { slug } = useParams();
 
@@ -29,15 +31,9 @@ export default function Product() {
     fetchProduct();
   }, [slug]);
 
-  // const imageThumbnails = product.imageUrls?.map((image, index) => (
-  //     <img
-  //       key={index}
-  //       className={`${styles.thumbnail} ${currentIndex === index ? styles.active : ""}`}
-  //       src={image}
-  //       alt={`Thumbnail ${slug + index}`}
-  //       onClick={() => setCurrentIndex(index)}
-  //     />
-  // ));
+  const handleCloseModal = () => {
+    setIsImageModalOpen(false);
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -59,7 +55,12 @@ export default function Product() {
             ))}
           </div>
           <div className={styles.imgContainer}>
-            <img className={styles.img} src={product.imageUrls[currentIndex]} alt={`${product.name} pic`} />
+            <img
+              className={styles.img}
+              src={product.imageUrls[currentIndex]}
+              alt={`${product.name} pic`}
+              onClick={() => setIsImageModalOpen(true)}
+            />
           </div>
         </div>
         <div className={styles.textSection}>
@@ -70,6 +71,9 @@ export default function Product() {
           {/* <p>Category: {product.category}</p> */}
         </div>
       </div>
+      {isImageModalOpen && (
+        <ImageModal productName={product.name} imageUrl={product.imageUrls[currentIndex]} onCloseModal={handleCloseModal} />
+      )}
     </div>
   );
 }
