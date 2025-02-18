@@ -15,13 +15,11 @@
   display: flex;
   flex-direction: column;
   background-color: var(--background);
-  border: 3.5px solid red;
 }
 
 .title {
   display: flex;
   justify-content: space-between;
-  background-color: red;
   color: white;
   padding: 0 4px 3px 10px;
   font-size: 16px;

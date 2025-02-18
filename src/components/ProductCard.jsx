@@ -1,11 +1,20 @@
 import styles from "../styles/ProductCard.module.css";
 import PropTypes from "prop-types";
+import Alert from "./Alert";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { AddShoppingCartTwoTone } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/cartReducer";
 
 export default function ProductCard({ imageUrls, name, brand, description, price, slug }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState({ left: false, right: false });
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? imageUrls.length - 1 : prevIndex - 1));
@@ -16,19 +25,26 @@ export default function ProductCard({ imageUrls, name, brand, description, price
   };
 
   const handleAddToCart = async () => {
-    try {
-      const res = await fetch("http://localhost:3000/carts/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ slug, quantity: 1 }),
-      });
-      if (res.ok) {
+    if (user.publicId) {
+      try {
+        const res = await fetch("http://localhost:3000/carts/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ slug, quantity: 1 }),
+        });
         const data = await res.json();
-        console.log(data);
+        if (res.status === 200) {
+          setMessage(data.message);
+          dispatch(addToCart({ product: { name, price, slug, imageUrls: imageUrls[0] }, quantity: 1 }));
+        } else {
+          setErrorMessage(data.message);
+        }
+      } catch (error) {
+        console.error("Error adding product to cart:", error);
       }
-    } catch (error) {
-      console.error("Error adding product to cart:", error);
+    } else {
+      setErrorMessage("You need to be connected to add product in cart.");
     }
   };
 
@@ -61,11 +77,13 @@ export default function ProductCard({ imageUrls, name, brand, description, price
         </Link>
         <div className={styles.addToCartContainer}>
           <p className={styles.price}>Price: {price}€</p>
-          <button className="btn" onClick={handleAddToCart}>
-            Add to cart
+          <button className={`btn ${styles.addBtn}`} onClick={handleAddToCart}>
+            <AddShoppingCartTwoTone style={{ fontSize: 22 }} />
           </button>
         </div>
       </div>
+      {message && <Alert title="Info" onClose={() => setMessage("")} content={message} color="var(--dark-blue)" autoClose />}
+      {errorMessage && <Alert title="Alert" onClose={() => setErrorMessage("")} content={errorMessage} color="red" />}
     </div>
   );
 }

@@ -26,6 +26,7 @@ export default function AddProduct() {
   const stockRef = useRef();
   const categoryRef = useRef(null);
   const imageRef = useRef();
+  const lastFocusedInput = useRef(null);
 
   const categories = ["audio", "retro-gaming", "films-and-tv-series", "toys-and-goodies", "fashion", "electronics"];
 
@@ -63,32 +64,32 @@ export default function AddProduct() {
 
   const handleAddProduct = async () => {
     if (name.trim() === "") {
+      lastFocusedInput.current = nameRef.current;
       setErrorMessage("Please enter the product name");
-      nameRef.current.focus();
       return;
     } else if (brand.trim() === "") {
+      lastFocusedInput.current = brandRef.current;
       setErrorMessage("Please enter the product brand");
-      brandRef.current.focus();
       return;
     } else if (description.trim() === "") {
+      lastFocusedInput.current = descriptionRef.current;
       setErrorMessage("Please enter the product description");
-      descriptionRef.current.focus();
       return;
     } else if (price === 0) {
+      lastFocusedInput.current = priceRef.current;
       setErrorMessage("Please enter the product price");
-      priceRef.current.focus();
       return;
     } else if (category.length === 0) {
+      lastFocusedInput.current = categoryRef.current;
       setErrorMessage("Please enter at least one category");
-      categoryRef.current.focus();
       return;
     } else if (stock === 0) {
+      lastFocusedInput.current = stockRef.current;
       setErrorMessage("Please enter the product stock");
-      stockRef.current.focus();
       return;
     } else if (images.every((img) => img.trim() === "")) {
+      lastFocusedInput.current = imageRef.current;
       setErrorMessage("Please enter at least one image URL");
-      imageRef.current.focus();
       return;
     } else {
       setErrorMessage("");
@@ -113,7 +114,16 @@ export default function AddProduct() {
         }
       } catch (error) {
         console.error("Error saving new product:", error);
+        lastFocusedInput.current = nameRef.current;
+        setErrorMessage("Unable to connect to the server. Please try again later.");
       }
+    }
+  };
+
+  const handleCloseError = () => {
+    setErrorMessage("");
+    if (lastFocusedInput.current) {
+      lastFocusedInput.current.focus();
     }
   };
 
@@ -248,13 +258,7 @@ export default function AddProduct() {
       <button type="submit" onClick={handleAddProduct} className={`btn ${styles.button} ${styles.addProductBtn}`}>
         Add Product
       </button>
-      <div className={styles.errorAlert}>
-        {errorMessage ? (
-          <Alert title="Alert" onClose={() => setErrorMessage("")} content={errorMessage} />
-        ) : (
-          <span style={{ visibility: "hidden" }}>Invisible</span>
-        )}
-      </div>
+      {errorMessage && <Alert title="Alert" onClose={handleCloseError} content={errorMessage} color="red" />}
     </div>
   );
 }

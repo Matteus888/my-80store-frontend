@@ -55,7 +55,14 @@
   font-weight: 400;
 }
 
-.profileContainer {
+.totalPrice {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: end;
+}
+
+.profileContainer,
+.cartContainer {
   position: relative;
   display: inline-block;
 }

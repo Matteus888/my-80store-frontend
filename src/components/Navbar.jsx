@@ -1,5 +1,6 @@
 import styles from "../styles/Navbar.module.css";
 import ConfirmationModal from "./ConfirmationModal";
+import ProductMiniCard from "./ProductMiniCard";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/userReducer";
@@ -11,10 +12,13 @@ export default function Navbar() {
   const [isLogged, setIsLogged] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
 
   const location = useLocation();
 
   const user = useSelector((state) => state.user.value);
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartTotalPrice = useSelector((state) => state.cart.totalPrice);
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
@@ -58,10 +62,44 @@ export default function Navbar() {
         </Link>
       </div>
       <div className={styles.iconSection}>
-        <Link to="/cart" className={`btn ${styles.link} ${location.pathname === "/cart" ? styles.activeLink : ""} ${styles.iconContainer}`}>
-          <ShoppingCartTwoTone style={{ fontSize: 18 }} />
-          <p className={styles.iconText}>Cart</p>
-        </Link>
+        {user.firstname && (
+          <div
+            className={styles.cartContainer}
+            onMouseEnter={() => setIsCartDropdownOpen(true)}
+            onMouseLeave={() => setIsCartDropdownOpen(false)}
+          >
+            <Link
+              to="/cart"
+              className={`btn ${styles.link} ${location.pathname === "/cart" ? styles.activeLink : ""} ${styles.iconContainer}`}
+            >
+              <ShoppingCartTwoTone style={{ fontSize: 18 }} />
+              <p className={styles.iconText}>Cart</p>
+            </Link>
+            {isCartDropdownOpen && (
+              <div className={styles.dropdownMenu}>
+                <p className={styles.dropdownTxt}>{user.firstname}&apos;s cart</p>
+                {cartItems.length > 0 ? (
+                  cartItems.map((item) => (
+                    <ProductMiniCard
+                      key={item.slug}
+                      name={item.name}
+                      imageUrl={item.imageUrls}
+                      quantity={item.quantity}
+                      price={item.price}
+                    />
+                  ))
+                ) : (
+                  <p>Cart is empty</p>
+                )}
+                {cartTotalPrice !== 0 && <p className={styles.totalPrice}>Total: {cartTotalPrice}€</p>}
+                <Link to="/cart" className={`btn ${styles.dropdownBtn}`}>
+                  <ShoppingCartTwoTone style={{ fontSize: 18 }} />
+                  Got to my cart
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
         {!isLogged ? (
           <Link
             to="/connect"
@@ -76,13 +114,13 @@ export default function Navbar() {
             onMouseEnter={() => setIsProfileMenuOpen(true)}
             onMouseLeave={() => setIsProfileMenuOpen(false)}
           >
-            <button
+            <Link
               to="/profile"
               className={`btn ${styles.link} ${location.pathname === "/profile" ? styles.activeLink : ""} ${styles.iconContainer}`}
             >
               <SentimentSatisfiedAltTwoTone style={{ fontSize: 18 }} />
               <p className={styles.iconText}>Profile</p>
-            </button>
+            </Link>
             {isProfileMenuOpen && (
               <div className={styles.dropdownMenu}>
                 <p className={styles.dropdownTxt}>Welcome {user.firstname}</p>

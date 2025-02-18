@@ -25,29 +25,30 @@ export default function Connection() {
   const passwordRef = useRef(null);
   const emailLogRef = useRef(null);
   const passwordLogRef = useRef(null);
+  const lastFocusedInput = useRef(null);
 
   const handleRegisterSubmit = async () => {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     if (firstname.trim() === "") {
+      lastFocusedInput.current = firstnameRef.current;
       setErrorMessage("Please enter your firstname");
-      firstnameRef.current.focus();
       return;
     } else if (lastname.trim() === "") {
+      lastFocusedInput.current = lastnameRef.current;
       setErrorMessage("Please enter your lastname");
-      lastnameRef.current.focus();
       return;
     } else if (email.trim() === "") {
+      lastFocusedInput.current = emailRef.current;
       setErrorMessage("Please enter your email");
-      emailRef.current.focus();
       return;
     } else if (!regex.test(email)) {
+      lastFocusedInput.current = emailRef.current;
       setErrorMessage("Invalid email address");
-      emailRef.current.focus();
       return;
     } else if (password.trim() === "") {
+      lastFocusedInput.current = passwordRef.current;
       setErrorMessage("Please enter a password");
-      passwordRef.current.focus();
       return;
     } else {
       setErrorMessage("");
@@ -71,10 +72,12 @@ export default function Connection() {
           setLastname("");
           navigate("/");
         } else {
+          lastFocusedInput.current = emailRef.current;
           setErrorMessage("This user already exists");
         }
       } catch (error) {
         console.error("Error during registration:", error);
+        lastFocusedInput.current = emailRef.current;
         setErrorMessage("Unable to connect to the server. Please try again later.");
       }
     }
@@ -84,16 +87,16 @@ export default function Connection() {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     if (emailLog.trim() === "") {
+      lastFocusedInput.current = emailLogRef.current;
       setErrorMessageLog("Please enter your email");
-      emailLogRef.current.focus();
       return;
     } else if (!regex.test(emailLog)) {
+      lastFocusedInput.current = emailLogRef.current;
       setErrorMessageLog("Invalid email address");
-      emailLogRef.current.focus();
       return;
     } else if (passwordLog.trim() === "") {
+      lastFocusedInput.current = passwordLogRef.current;
       setErrorMessageLog("Please enter your password");
-      passwordLogRef.current.focus();
       return;
     } else {
       setErrorMessageLog("");
@@ -121,8 +124,17 @@ export default function Connection() {
         }
       } catch (error) {
         console.error("Error during login:", error);
+        lastFocusedInput.current = emailLogRef.current;
         setErrorMessageLog("Unable to connect to the server. Please try again later.");
       }
+    }
+  };
+
+  const handleCloseError = () => {
+    setErrorMessage("");
+    setErrorMessageLog("");
+    if (lastFocusedInput.current) {
+      lastFocusedInput.current.focus();
     }
   };
 
@@ -184,9 +196,7 @@ export default function Connection() {
           <button className={`btn ${styles.button}`} type="submit" onClick={handleRegisterSubmit}>
             Register
           </button>
-          <p className={styles.errorAlert} role="alert">
-            {errorMessage && <Alert title="Alert" onClose={() => setErrorMessage("")} content={errorMessage} />}
-          </p>
+          {errorMessage && <Alert title="Alert" onClose={handleCloseError} content={errorMessage} color="red" />}
         </div>
         <div className={styles.loginSection}>
           <h2>Connect</h2>
@@ -219,9 +229,7 @@ export default function Connection() {
           <button className={`btn ${styles.button}`} type="submit" onClick={handleLoginSubmit}>
             Login
           </button>
-          <div className={styles.errorAlert}>
-            {errorMessageLog && <Alert title="Alert" onClose={() => setErrorMessageLog("")} content={errorMessageLog} />}
-          </div>
+          {errorMessageLog && <Alert title="Alert" onClose={handleCloseError} content={errorMessageLog} color="red" />}
         </div>
       </div>
     </div>
