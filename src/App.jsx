@@ -15,7 +15,7 @@ import Navbar from "./components/Navbar";
 
 export default function App() {
   const dispatch = useDispatch();
-  const expiresAt = useSelector((state) => state.user.value.expiresAt);
+  const expiresAt = useSelector((state) => state.user.user.expiresAt);
 
   useEffect(() => {
     if (!expiresAt) return;

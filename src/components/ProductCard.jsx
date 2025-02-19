@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AddShoppingCartTwoTone } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../store/cartReducer";
+import { updateCart } from "../store/userReducer";
 
 export default function ProductCard({ imageUrls, name, brand, description, price, slug }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -13,7 +13,7 @@ export default function ProductCard({ imageUrls, name, brand, description, price
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const user = useSelector((state) => state.user.value);
+  const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   const handlePrev = () => {
@@ -36,7 +36,7 @@ export default function ProductCard({ imageUrls, name, brand, description, price
         const data = await res.json();
         if (res.status === 200) {
           setMessage(data.message);
-          dispatch(addToCart({ product: { name, price, slug, imageUrls: imageUrls[0] }, quantity: 1 }));
+          dispatch(updateCart({ items: data.cart.items, totalPrice: data.cart.totalPrice }));
         } else {
           setErrorMessage(data.message);
         }

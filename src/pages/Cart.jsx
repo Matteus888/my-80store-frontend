@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/Cart.module.css";
 import { Link } from "react-router-dom";
 import Alert from "../components/Alert";
 import ConfirmationModal from "../components/ConfirmationModal";
 import { DeleteTwoTone, DeleteForeverTwoTone } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
-import { removeFromCart, updateQuantity, clearCart } from "../store/cartReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCart, clearCart } from "../store/userReducer";
 
 export default function Cart() {
   const [productsList, setProductsList] = useState({ items: [] });
@@ -13,7 +14,10 @@ export default function Cart() {
   const [message, setMessage] = useState("");
   const [confirmationMessage, setConfirmationMessage] = useState("");
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -30,8 +34,12 @@ export default function Cart() {
         console.error("Error getting cart:", error);
       }
     };
-    fetchCart();
-  }, [updateTrigger]);
+    if (user.publicId) {
+      fetchCart();
+    } else {
+      navigate("/");
+    }
+  }, [updateTrigger, user.publicId, navigate]);
 
   const handleUpdateQuantity = async (slug, newQuantity) => {
     try {
@@ -42,8 +50,13 @@ export default function Cart() {
         body: JSON.stringify({ slug, quantity: newQuantity }),
       });
       if (res.ok) {
-        dispatch(updateQuantity({ slug, quantity: newQuantity }));
+        const updatedCart = await res.json();
+        dispatch(updateCart(updatedCart.cart));
         setUpdateTrigger((prev) => !prev);
+      }
+      if (res.status === 404) {
+        const data = await res.json();
+        console.log(data.message);
       }
     } catch (error) {
       console.error("Error updating item quantity:", error);
@@ -58,8 +71,8 @@ export default function Cart() {
         credentials: "include",
       });
       const data = await res.json();
-      if (res.status === 200) {
-        dispatch(removeFromCart(slug));
+      if (res.ok) {
+        dispatch(updateCart(data.cart));
         setUpdateTrigger((prev) => !prev);
         setMessage(data.message);
       }

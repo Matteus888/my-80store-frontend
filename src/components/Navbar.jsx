@@ -15,11 +15,11 @@ export default function Navbar() {
   const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
 
   const location = useLocation();
-
-  const user = useSelector((state) => state.user.value);
-  const cartItems = useSelector((state) => state.cart.items);
-  const cartTotalPrice = useSelector((state) => state.cart.totalPrice);
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user.user);
+  const cartItems = useSelector((state) => state.user.cart?.items || []);
+  const cartTotalPrice = useSelector((state) => state.user.cart?.totalPrice || 0);
 
   const handleLogout = async () => {
     setIsModalOpen(false);
@@ -29,6 +29,9 @@ export default function Navbar() {
         credentials: "include",
       });
       dispatch(logout());
+      localStorage.clear(); // Force la suppression du cache Redux Persist
+      sessionStorage.clear();
+      window.location.reload(); // Recharge la page pour tout réinitialiser
     } catch (error) {
       console.error("Signout failed:", error);
     }
@@ -39,7 +42,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    setIsAdmin(user.role === "admin");
+    setIsAdmin(user?.role === "admin");
     setIsLogged(user.publicId !== null);
   }, [user]);
 
@@ -62,7 +65,7 @@ export default function Navbar() {
         </Link>
       </div>
       <div className={styles.iconSection}>
-        {user.firstname && (
+        {isLogged && (
           <div
             className={styles.cartContainer}
             onMouseEnter={() => setIsCartDropdownOpen(true)}
@@ -81,11 +84,11 @@ export default function Navbar() {
                 {cartItems.length > 0 ? (
                   cartItems.map((item) => (
                     <ProductMiniCard
-                      key={item.slug}
-                      name={item.name}
-                      imageUrl={item.imageUrls}
+                      key={item.product.slug}
+                      name={item.product.name}
+                      imageUrl={item.product.imageUrls[0]}
                       quantity={item.quantity}
-                      price={item.price}
+                      price={item.product.price}
                     />
                   ))
                 ) : (

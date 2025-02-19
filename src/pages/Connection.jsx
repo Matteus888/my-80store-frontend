@@ -3,7 +3,7 @@ import Alert from "../components/Alert";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../store/userReducer";
+import { login, loginAndFetchCart } from "../store/userReducer";
 
 export default function Connection() {
   const [firstname, setFirstname] = useState("");
@@ -64,7 +64,13 @@ export default function Connection() {
         if (res.ok) {
           const data = await res.json();
           dispatch(
-            login({ firstname: data.user.firstname, lastname: data.user.lastname, publicId: data.user.publicId, role: data.user.role })
+            login({
+              firstname: data.user.firstname,
+              lastname: data.user.lastname,
+              publicId: data.user.publicId,
+              role: data.user.role,
+              cart: { items: [], totalPrice: 0 },
+            })
           );
           setEmail("");
           setPassword("");
@@ -112,15 +118,18 @@ export default function Connection() {
         if (res.ok) {
           const data = await res.json();
           dispatch(
-            login({ firstname: data.user.firstname, lastname: data.user.lastname, publicId: data.user.publicId, role: data.user.role })
+            loginAndFetchCart({
+              firstname: data.user.firstname,
+              lastname: data.user.lastname,
+              publicId: data.user.publicId,
+              role: data.user.role,
+            })
           );
           setEmailLog("");
           setPasswordLog("");
-          if (data.user.role === "admin") {
-            navigate("/addproduct");
-          } else {
-            navigate("/products");
-          }
+          navigate(data.user.role === "admin" ? "/addProduct" : "/products");
+        } else {
+          setErrorMessageLog("Invalid credentials");
         }
       } catch (error) {
         console.error("Error during login:", error);

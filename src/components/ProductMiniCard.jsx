@@ -9,7 +9,7 @@ export default function ProductMiniCard({ name, imageUrl, quantity, price }) {
           <img className={styles.img} src={imageUrl} alt={name} />
         </div>
         <p className={styles.name}>
-          {name.length < 18 ? name : name.slice(0, 18)}... <span className={styles.quantity}>(x{quantity})</span>
+          {name.length < 18 ? name : name.slice(0, 18) + "..."} <span className={styles.quantity}>(x{quantity})</span>
         </p>
       </div>
       <p className={styles.price}>{price}€</p>
