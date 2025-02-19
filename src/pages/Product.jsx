@@ -1,16 +1,25 @@
 import styles from "../styles/product.module.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCart } from "../store/userReducer";
 import ImageModal from "../components/ImageModal";
+import Alert from "../components/Alert";
+import { AddShoppingCartTwoTone } from "@mui/icons-material";
 
 export default function Product() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   const { slug } = useParams();
+
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,6 +42,30 @@ export default function Product() {
 
   const handleCloseModal = () => {
     setIsImageModalOpen(false);
+  };
+
+  const handleAddToCart = async () => {
+    if (user.publicId) {
+      try {
+        const res = await fetch("http://localhost:3000/carts/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ slug, quantity: 1 }),
+        });
+        const data = await res.json();
+        if (res.status === 200) {
+          setMessage(data.message);
+          dispatch(updateCart({ items: data.cart.items, totalPrice: data.cart.totalPrice }));
+        } else {
+          setError(data.message);
+        }
+      } catch (error) {
+        console.error("Error adding product to cart:", error);
+      }
+    } else {
+      setErrorMessage("You need to be connected to add product in cart.");
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -67,13 +100,23 @@ export default function Product() {
           <h1>{product.name}</h1>
           <p>{product.brand}</p>
           <p>{product.description}</p>
+          <div>
+            Category:{" "}
+            {product.category.map((cat, i) => (
+              <p key={i}>{cat}</p>
+            ))}
+          </div>
           <p>Price: {product.price}€</p>
-          {/* <p>Category: {product.category}</p> */}
+          <button className={`btn ${styles.addBtn}`} onClick={handleAddToCart}>
+            <AddShoppingCartTwoTone style={{ fontSize: 22 }} />
+          </button>
         </div>
       </div>
       {isImageModalOpen && (
         <ImageModal productName={product.name} imageUrl={product.imageUrls[currentIndex]} onCloseModal={handleCloseModal} />
       )}
+      {message && <Alert title="Info" onClose={() => setMessage("")} content={message} color="var(--dark-blue)" autoClose />}
+      {errorMessage && <Alert title="Alert" onClose={() => setErrorMessage("")} content={errorMessage} color="red" />}
     </div>
   );
 }

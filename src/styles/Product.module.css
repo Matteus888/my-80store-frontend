@@ -13,7 +13,7 @@
   height: 95%;
   margin: 30px 0;
   padding: 20px;
-  background-color: white;
+  background-color: var(--background);
   border: 1px solid black;
 }
 
@@ -21,6 +21,7 @@
   display: flex;
   justify-content: flex-start;
   gap: 20px;
+  background-color: white;
 }
 
 .thumbnailContainer {
@@ -63,4 +64,10 @@
   &:hover {
     cursor: zoom-in;
   }
+}
+
+.addBtn {
+  width: 30px;
+  height: 30px;
+  padding-top: 2px;
 }
