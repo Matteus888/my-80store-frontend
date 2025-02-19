@@ -1,4 +1,4 @@
-import styles from "../styles/Navbar.module.css";
+import styles from "../styles/navbar.module.css";
 import Alert from "../components/Alert";
 import ConfirmationModal from "./ConfirmationModal";
 import ProductMiniCard from "./ProductMiniCard";

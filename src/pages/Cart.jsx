@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../styles/Cart.module.css";
+import styles from "../styles/cart.module.css";
 import { Link } from "react-router-dom";
 import Alert from "../components/Alert";
 import ConfirmationModal from "../components/ConfirmationModal";

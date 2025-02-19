@@ -1,4 +1,4 @@
-import styles from "../styles/FilterBar.module.css";
+import styles from "../styles/filterBar.module.css";
 import PropTypes from "prop-types";
 import Slider from "react-slider";
 

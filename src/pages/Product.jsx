@@ -1,4 +1,4 @@
-import styles from "../styles/Product.module.css";
+import styles from "../styles/product.module.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ImageModal from "../components/ImageModal";

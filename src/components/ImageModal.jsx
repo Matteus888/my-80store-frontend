@@ -1,4 +1,4 @@
-import styles from "../styles/ImageModal.module.css";
+import styles from "../styles/imageModal.module.css";
 import PropTypes from "prop-types";
 
 export default function ImageModal({ productName, imageUrl, onCloseModal }) {

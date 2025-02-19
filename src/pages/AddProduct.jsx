@@ -1,4 +1,4 @@
-import styles from "../styles/AddProduct.module.css";
+import styles from "../styles/addProduct.module.css";
 import Alert from "../components/Alert";
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";

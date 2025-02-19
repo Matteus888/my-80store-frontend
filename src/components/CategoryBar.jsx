@@ -1,4 +1,4 @@
-import styles from "../styles/CategoryBar.module.css";
+import styles from "../styles/categoryBar.module.css";
 import PropTypes from "prop-types";
 import { TuneTwoTone } from "@mui/icons-material";
 

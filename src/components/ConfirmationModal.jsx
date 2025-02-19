@@ -1,4 +1,4 @@
-import styles from "../styles/ConfirmationModal.module.css";
+import styles from "../styles/confirmationModal.module.css";
 import PropTypes from "prop-types";
 
 export default function ConfirmationModal({ title, content, btnTxt, onPressBtn, onCloseModal }) {

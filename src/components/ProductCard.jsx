@@ -1,4 +1,4 @@
-import styles from "../styles/ProductCard.module.css";
+import styles from "../styles/productCard.module.css";
 import PropTypes from "prop-types";
 import Alert from "./Alert";
 import { useState } from "react";
