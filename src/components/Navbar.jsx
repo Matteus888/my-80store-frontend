@@ -1,10 +1,11 @@
 import styles from "../styles/Navbar.module.css";
+import Alert from "../components/Alert";
 import ConfirmationModal from "./ConfirmationModal";
 import ProductMiniCard from "./ProductMiniCard";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../store/userReducer";
-import { Link, useLocation } from "react-router-dom";
+import { logout, loginAndFetchCart } from "../store/userReducer";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SentimentSatisfiedAltTwoTone, ShopTwoTwoTone, SettingsTwoTone, ShoppingCartTwoTone, LogoutTwoTone } from "@mui/icons-material";
 
 export default function Navbar() {
@@ -12,14 +13,65 @@ export default function Navbar() {
   const [isLogged, setIsLogged] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isLoginMenuOpen, setIsLoginMenuOpen] = useState(false);
   const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
+  const [emailLog, setEmailLog] = useState("");
+  const [passwordLog, setPasswordLog] = useState("");
+  const [errorMessageLog, setErrorMessageLog] = useState("");
 
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.user);
   const cartItems = useSelector((state) => state.user.cart?.items || []);
   const cartTotalPrice = useSelector((state) => state.user.cart?.totalPrice || 0);
+
+  const handleLoginSubmit = async () => {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    if (emailLog.trim() === "") {
+      setErrorMessageLog("Please enter your email");
+      return;
+    } else if (!regex.test(emailLog)) {
+      setErrorMessageLog("Invalid email address");
+      return;
+    } else if (passwordLog.trim() === "") {
+      setErrorMessageLog("Please enter your password");
+      return;
+    } else {
+      setErrorMessageLog("");
+
+      try {
+        const res = await fetch("http://localhost:3000/users/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ emailLog, passwordLog }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          dispatch(
+            loginAndFetchCart({
+              firstname: data.user.firstname,
+              lastname: data.user.lastname,
+              publicId: data.user.publicId,
+              role: data.user.role,
+            })
+          );
+          setEmailLog("");
+          setPasswordLog("");
+          navigate(data.user.role === "admin" ? "/addProduct" : "/products");
+        } else {
+          setErrorMessageLog("Invalid credentials");
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        setErrorMessageLog("Unable to connect to the server. Please try again later.");
+      }
+    }
+  };
 
   const handleLogout = async () => {
     setIsModalOpen(false);
@@ -31,7 +83,7 @@ export default function Navbar() {
       dispatch(logout());
       localStorage.clear(); // Force la suppression du cache Redux Persist
       sessionStorage.clear();
-      window.location.reload(); // Recharge la page pour tout réinitialiser
+      setIsLoginMenuOpen(false);
     } catch (error) {
       console.error("Signout failed:", error);
     }
@@ -104,13 +156,60 @@ export default function Navbar() {
           </div>
         )}
         {!isLogged ? (
-          <Link
-            to="/connect"
-            className={`btn ${styles.link} ${location.pathname === "/connect" ? styles.activeLink : ""} ${styles.iconContainer}`}
+          <div
+            className={styles.profileContainer}
+            onMouseEnter={() => setIsLoginMenuOpen(true)}
+            onMouseLeave={() => setIsLoginMenuOpen(false)}
           >
-            <SentimentSatisfiedAltTwoTone style={{ fontSize: 18 }} />
-            <p className={styles.iconText}>Login</p>
-          </Link>
+            <Link
+              to="/connect"
+              className={`btn ${styles.link} ${location.pathname === "/connect" ? styles.activeLink : ""} ${styles.iconContainer}`}
+            >
+              <SentimentSatisfiedAltTwoTone style={{ fontSize: 18 }} />
+              <p className={styles.iconText}>Login</p>
+            </Link>
+            {isLoginMenuOpen && (
+              <div className={styles.dropdownMenu}>
+                <p className={styles.dropdownTxt}>Connect</p>
+                <form action="submit" onSubmit={async (e) => e.preventDefault()} className={styles.loginForm}>
+                  <label className={styles.label} htmlFor="emailLogin">
+                    Email
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="email"
+                    id="emailLogin"
+                    placeholder="Enter your email"
+                    value={emailLog}
+                    onChange={(e) => setEmailLog(e.target.value)}
+                  />
+                  <label className={styles.label} htmlFor="passwordLogin">
+                    Password
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="password"
+                    id="passwordLogin"
+                    placeholder="Enter your password"
+                    value={passwordLog}
+                    onChange={(e) => setPasswordLog(e.target.value)}
+                  />
+                </form>
+                <button className={`btn ${styles.loginBtn}`} type="submit" onClick={handleLoginSubmit}>
+                  Login
+                </button>
+                <div className={styles.lineContainer}>
+                  <div className={styles.line}></div>
+                  <p className={styles.lineTxt}>OR</p>
+                  <div className={styles.line}></div>
+                </div>
+                <Link to="/connect" className={`btn ${styles.registerBtn}`} onClick={() => setIsLoginMenuOpen(false)}>
+                  Register
+                </Link>
+                {errorMessageLog && <Alert title="Alert" onClose={() => setErrorMessageLog("")} content={errorMessageLog} color="red" />}
+              </div>
+            )}
+          </div>
         ) : (
           <div
             className={styles.profileContainer}

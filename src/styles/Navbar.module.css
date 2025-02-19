@@ -55,6 +55,62 @@
   font-weight: 400;
 }
 
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.label {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 2px solid #808080;
+  outline: none;
+  background-color: white;
+  color: black;
+  font-size: 12px;
+  box-shadow: inset -2px -2px 0px white, inset 2px 2px 0px black;
+
+  &:focus {
+    border: 2px solid red;
+  }
+
+  &:hover {
+    cursor: text;
+  }
+}
+
+.loginBtn,
+.registerBtn {
+  background-color: var(--background);
+  padding: 5px 0;
+  margin-top: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.lineContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -5px;
+}
+
+.line {
+  width: 120px;
+  height: 0.5px;
+  background-color: black;
+}
+
+.lineTxt {
+  font-size: 14px;
+}
+
 .totalPrice {
   font-size: 14px;
   font-weight: 600;
