@@ -26,5 +26,11 @@ export default function Profile() {
   }, []);
   console.log(infos);
 
-  return <div className={styles.main}>Profile Page</div>;
+  return (
+    <div className={styles.main}>
+      <div className={styles.container}>
+        <p>My Profile</p>
+      </div>
+    </div>
+  );
 }

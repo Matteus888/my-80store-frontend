@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "./store/userReducer";
 import Home from "./pages/Home";
-import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Connection from "./pages/Connection";
 import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
+import UpdateProduct from "./pages/UpdateProduct";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Header from "./components/Header";
@@ -38,7 +38,7 @@ export default function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/addproduct" element={<AddProduct />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/updateproduct" element={<UpdateProduct />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/connect" element={<Connection />} />

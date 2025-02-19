@@ -97,19 +97,21 @@ export default function Product() {
           </div>
         </div>
         <div className={styles.textSection}>
-          <h1>{product.name}</h1>
-          <p>{product.brand}</p>
-          <p>{product.description}</p>
           <div>
-            Category:{" "}
-            {product.category.map((cat, i) => (
-              <p key={i}>{cat}</p>
-            ))}
+            <p className={styles.name}>{product.name}</p>
+            <p>{product.brand}</p>
+            <p className={styles.description}>Description:</p>
+            <p>{product.description}</p>
           </div>
-          <p>Price: {product.price}€</p>
-          <button className={`btn ${styles.addBtn}`} onClick={handleAddToCart}>
-            <AddShoppingCartTwoTone style={{ fontSize: 22 }} />
-          </button>
+          <div className={styles.priceContainer}>
+            <p>
+              <span className={styles.price}>Price:</span> {product.price}€
+            </p>
+            <button className={`btn ${styles.addBtn}`} onClick={handleAddToCart}>
+              Add to cart
+              <AddShoppingCartTwoTone style={{ fontSize: 22 }} />
+            </button>
+          </div>
         </div>
       </div>
       {isImageModalOpen && (

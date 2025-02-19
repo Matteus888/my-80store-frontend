@@ -17,7 +17,7 @@ export default function AddProduct() {
 
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.user.value);
+  const user = useSelector((state) => state.user.user);
 
   const nameRef = useRef();
   const brandRef = useRef();
@@ -129,136 +129,138 @@ export default function AddProduct() {
 
   return (
     <div className={styles.main}>
-      <form action="submit" onSubmit={async (e) => e.preventDefault()} className={styles.form}>
-        <div className={styles.left}>
-          <div className={styles.inputContainer}>
-            <label htmlFor="name" className={styles.label}>
-              Product Name
-            </label>
-            <input
-              className={styles.input}
-              ref={nameRef}
-              type="text"
-              id="name"
-              placeholder="Product Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <label htmlFor="brand" className={styles.label}>
-              Brand
-            </label>
-            <input
-              className={styles.input}
-              ref={brandRef}
-              type="text"
-              id="brand"
-              placeholder="Brand"
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <label htmlFor="description" className={styles.label}>
-              Description
-            </label>
-            <textarea
-              className={styles.input}
-              cols={33}
-              rows={4}
-              ref={descriptionRef}
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            >
-              Description
-            </textarea>
-          </div>
-          <div className={styles.numSection}>
+      <div className={styles.container}>
+        <form action="submit" onSubmit={async (e) => e.preventDefault()} className={styles.form}>
+          <div className={styles.left}>
             <div className={styles.inputContainer}>
-              <label htmlFor="price" className={styles.label}>
-                Price
+              <label htmlFor="name" className={styles.label}>
+                Product Name
               </label>
               <input
-                className={`${styles.input} ${styles.numInput}`}
-                ref={priceRef}
-                type="number"
-                id="price"
-                placeholder="Price in €"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                className={styles.input}
+                ref={nameRef}
+                type="text"
+                id="name"
+                placeholder="Product Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div className={`${styles.inputContainer} ${styles.stockContainer}`}>
-              <label htmlFor="stock" className={styles.label}>
-                Stock
+            <div className={styles.inputContainer}>
+              <label htmlFor="brand" className={styles.label}>
+                Brand
               </label>
               <input
-                className={`${styles.input} ${styles.numInput}`}
-                ref={stockRef}
-                type="number"
-                id="stock"
-                placeholder="Stock"
-                value={stock}
-                onChange={(e) => setStock(e.target.value)}
+                className={styles.input}
+                ref={brandRef}
+                type="text"
+                id="brand"
+                placeholder="Brand"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
               />
             </div>
-          </div>
-          <div className={styles.inputContainer}>
-            <label htmlFor="category" className={styles.label}>
-              Categorie(s)
-            </label>
-            <div id="category" ref={categoryRef} className={styles.categories}>
-              {categories.map((cat) => (
-                <label key={cat} className={styles.category}>
-                  <input
-                    className={styles.categoryCheckbox}
-                    type="checkbox"
-                    value={cat}
-                    checked={category.includes(cat)}
-                    onChange={handleCheckboxChange}
-                  />
-                  {cat.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())}
+            <div className={styles.inputContainer}>
+              <label htmlFor="description" className={styles.label}>
+                Description
+              </label>
+              <textarea
+                className={styles.input}
+                cols={33}
+                rows={4}
+                ref={descriptionRef}
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              >
+                Description
+              </textarea>
+            </div>
+            <div className={styles.numSection}>
+              <div className={styles.inputContainer}>
+                <label htmlFor="price" className={styles.label}>
+                  Price
                 </label>
-              ))}
+                <input
+                  className={`${styles.input} ${styles.numInput}`}
+                  ref={priceRef}
+                  type="number"
+                  id="price"
+                  placeholder="Price in €"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+              <div className={`${styles.inputContainer} ${styles.stockContainer}`}>
+                <label htmlFor="stock" className={styles.label}>
+                  Stock
+                </label>
+                <input
+                  className={`${styles.input} ${styles.numInput}`}
+                  ref={stockRef}
+                  type="number"
+                  id="stock"
+                  placeholder="Stock"
+                  value={stock}
+                  onChange={(e) => setStock(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className={styles.inputContainer}>
+              <label htmlFor="category" className={styles.label}>
+                Categorie(s)
+              </label>
+              <div id="category" ref={categoryRef} className={styles.categories}>
+                {categories.map((cat) => (
+                  <label key={cat} className={styles.category}>
+                    <input
+                      className={styles.categoryCheckbox}
+                      type="checkbox"
+                      value={cat}
+                      checked={category.includes(cat)}
+                      onChange={handleCheckboxChange}
+                    />
+                    {cat.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())}
+                  </label>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles.right}>
-          <div className={styles.inputContainer}>
-            <label htmlFor="image" className={styles.label}>
-              Image(s) URL
-            </label>
-            {images.map((img, index) => (
-              <div key={index} className={styles.imageInputContainer}>
-                {img && <img src={img} alt={`Preview ${index}`} className={styles.imagePreview} />}
-                <div className={styles.imageInputDiv}>
-                  <input
-                    className={`${styles.input} ${styles.imageInput}`}
-                    ref={imageRef}
-                    type="text"
-                    id="image"
-                    placeholder="Image URL"
-                    value={img}
-                    onChange={(e) => handleImageChange(index, e.target.value)}
-                  />
-                  <div className={`btn ${styles.button} ${styles.deleteBtn}`}>
-                    <DeleteForever onClick={() => removeImageField(index)} style={{ color: "red", fontSize: "18px" }} />
+          <div className={styles.right}>
+            <div className={styles.inputContainer}>
+              <label htmlFor="image" className={styles.label}>
+                Image(s) URL
+              </label>
+              {images.map((img, index) => (
+                <div key={index} className={styles.imageInputContainer}>
+                  {img && <img src={img} alt={`Preview ${index}`} className={styles.imagePreview} />}
+                  <div className={styles.imageInputDiv}>
+                    <input
+                      className={`${styles.input} ${styles.imageInput}`}
+                      ref={imageRef}
+                      type="text"
+                      id="image"
+                      placeholder="Image URL"
+                      value={img}
+                      onChange={(e) => handleImageChange(index, e.target.value)}
+                    />
+                    <div className={`btn ${styles.button} ${styles.deleteBtn}`}>
+                      <DeleteForever onClick={() => removeImageField(index)} style={{ color: "red", fontSize: "18px" }} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-            <button type="button" onClick={addImageField} className={`btn ${styles.button} ${styles.addPicBtn}`}>
-              + Add a picture
-            </button>
+              ))}
+              <button type="button" onClick={addImageField} className={`btn ${styles.button} ${styles.addPicBtn}`}>
+                + Add a picture
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
-      <button type="submit" onClick={handleAddProduct} className={`btn ${styles.button} ${styles.addProductBtn}`}>
-        Add Product
-      </button>
-      {errorMessage && <Alert title="Alert" onClose={handleCloseError} content={errorMessage} color="red" />}
+        </form>
+        <button type="submit" onClick={handleAddProduct} className={`btn ${styles.button} ${styles.addProductBtn}`}>
+          Add Product
+        </button>
+        {errorMessage && <Alert title="Alert" onClose={handleCloseError} content={errorMessage} color="red" />}
+      </div>
     </div>
   );
 }

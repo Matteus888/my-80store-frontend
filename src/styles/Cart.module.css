@@ -20,15 +20,15 @@
 .itemContainer {
   display: flex;
   justify-content: space-between;
+  background-color: var(--background);
+  border: 1px solid black;
 }
 
 .item {
   display: flex;
   gap: 20px;
-  width: 700px;
-  border: 1px solid black;
+  /* width: 700px; */
   padding: 10px;
-  background-color: var(--background);
 }
 
 .imgContainer {
@@ -39,10 +39,36 @@
   background-color: white;
 }
 
-.imgContainer img {
+.img {
   width: 120px;
   height: auto;
   object-fit: contain;
+}
+
+.textContainer {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.brand {
+  font-size: 14px;
+}
+
+.price {
+  font-size: 14px;
+}
+
+.priceSpan {
+  text-decoration: underline;
+  font-weight: 600;
+  margin-right: 10px;
 }
 
 .quantitySection {
@@ -50,9 +76,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: end;
-  padding: 20px 0;
-  background-color: var(--background);
-  border: 1px solid black;
+  padding: 20px 10px;
 }
 
 .quantityContainer {
@@ -60,17 +84,17 @@
   align-items: center;
   gap: 10px;
   height: 20px;
+}
 
-  p {
-    font-weight: 600;
-    font-size: 20px;
-  }
+.quantityText {
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .quantityBtn {
-  width: 30px;
-  height: 30px;
-  font-size: 25px;
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
   font-weight: 900;
   display: flex;
   justify-content: center;
@@ -83,13 +107,19 @@
 }
 
 .deleteBtn {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   padding-top: 2px;
 }
 
 .priceContainer {
   text-align: end;
+}
+
+.totalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .emptyBtn {

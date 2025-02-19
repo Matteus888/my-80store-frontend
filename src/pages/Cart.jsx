@@ -18,6 +18,7 @@ export default function Cart() {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const cartTotalPrice = useSelector((state) => state.user.cart?.totalPrice || 0);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -106,12 +107,19 @@ export default function Cart() {
             <div key={i} className={styles.itemContainer}>
               <Link to={`/product/${item.product.slug}`} className={styles.item}>
                 <div className={styles.imgContainer}>
-                  <img src={item.product.imageUrls[0]} alt={item.product.name} />
+                  <img className={styles.img} src={item.product.imageUrls[0]} alt={item.product.name} />
                 </div>
-                <div>
-                  <p>{item.product.name}</p>
-                  <p>{item.product.brand}</p>
-                  <p>{item.product.price}€</p>
+                <div className={styles.textContainer}>
+                  <div>
+                    <p className={styles.name}>{item.product.name}</p>
+                    <p className={styles.brand}>{item.product.brand}</p>
+                  </div>
+                  <div>
+                    <p className={styles.price}>
+                      <span className={styles.priceSpan}>Price:</span>
+                      {item.product.price}€
+                    </p>
+                  </div>
                 </div>
               </Link>
               <div className={styles.quantitySection}>
@@ -123,7 +131,7 @@ export default function Cart() {
                   >
                     -
                   </button>
-                  <p>{item.quantity}</p>
+                  <p className={styles.quantityText}>{item.quantity}</p>
                   <button
                     className={`btn ${styles.quantityBtn}`}
                     onClick={() => handleUpdateQuantity(item.product.slug, item.quantity + 1)}
@@ -134,12 +142,14 @@ export default function Cart() {
                 </div>
                 <div className={styles.deleteContainer}>
                   <button className={`btn ${styles.deleteBtn}`} onClick={() => handleRemoveItem(item.product.slug)}>
-                    <DeleteTwoTone style={{ fontSize: 22, color: "red" }} />
+                    <DeleteTwoTone style={{ fontSize: 18, color: "red" }} />
                   </button>
                 </div>
                 <div className={styles.priceContainer}>
-                  <p>Total item price: </p>
-                  <p>{item.product.price * item.quantity}€</p>
+                  <p className={styles.price}>
+                    <span className={styles.priceSpan}>Total price:</span>
+                    {item.product.price * item.quantity}€
+                  </p>
                 </div>
               </div>
             </div>
@@ -148,7 +158,11 @@ export default function Cart() {
           <p>Votre panier est vide</p>
         )}
         {!(productsList.items.length === 0) && (
-          <div>
+          <div className={styles.totalContainer}>
+            <p className={styles.price}>
+              <span className={styles.priceSpan}>Total cart:</span>
+              {cartTotalPrice}€
+            </p>
             <button className={`btn ${styles.emptyBtn}`} onClick={() => setConfirmationMessage("Are you sure to empty your cart?")}>
               <DeleteForeverTwoTone style={{ color: "red", fontSize: 22 }} />
               Empty cart

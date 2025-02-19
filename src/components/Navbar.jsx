@@ -108,13 +108,15 @@ export default function Navbar() {
           Products
         </Link>
         {isAdmin && (
-          <Link to="/addproduct" className={`btn ${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
-            Add Product
-          </Link>
+          <>
+            <Link to="/addproduct" className={`btn ${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
+              Add Product
+            </Link>
+            <Link to="/updateproduct" className={`btn ${styles.link} ${location.pathname === "/updateproduct" ? styles.activeLink : ""}`}>
+              Update Product
+            </Link>
+          </>
         )}
-        <Link to="/about" className={`btn ${styles.link} ${location.pathname === "/about" ? styles.activeLink : ""}`}>
-          About
-        </Link>
       </div>
       <div className={styles.iconSection}>
         {isLogged && (
@@ -228,7 +230,7 @@ export default function Navbar() {
                 <p className={styles.dropdownTxt}>Welcome {user.firstname}</p>
                 <Link to="/profile" className={`btn ${styles.dropdownBtn}`}>
                   <SettingsTwoTone style={{ fontSize: 18 }} />
-                  My account
+                  My profile
                 </Link>
                 <Link to="/purchase" className={`btn ${styles.dropdownBtn}`}>
                   <ShopTwoTwoTone style={{ fontSize: 18 }} />
