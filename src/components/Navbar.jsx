@@ -105,21 +105,23 @@ export default function Navbar() {
           Home
         </Link>
         <Link to="/products" className={`btn ${styles.link} ${location.pathname === "/products" ? styles.activeLink : ""}`}>
-          Products
+          {!isAdmin ? <>Products</> : <>Update Products</>}
         </Link>
         {isAdmin && (
           <>
             <Link to="/addproduct" className={`btn ${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
               Add Product
             </Link>
-            <Link to="/updateproduct" className={`btn ${styles.link} ${location.pathname === "/updateproduct" ? styles.activeLink : ""}`}>
+            {/* <Link to="/updateproduct" className={`btn ${styles.link} ${location.pathname === "/updateproduct" ? styles.activeLink : ""}`}>
               Update Product
-            </Link>
+            </Link> */}
           </>
         )}
       </div>
+
       <div className={styles.iconSection}>
-        {isLogged && (
+        {/* Bouton panier */}
+        {isLogged && !isAdmin && (
           <div
             className={styles.cartContainer}
             onMouseEnter={() => setIsCartDropdownOpen(true)}
@@ -157,6 +159,8 @@ export default function Navbar() {
             )}
           </div>
         )}
+
+        {/* Bouton Login/Profile */}
         {!isLogged ? (
           <div
             className={styles.profileContainer}
