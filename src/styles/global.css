@@ -1,7 +1,8 @@
 :root {
   --background: #f0f0f0;
   --background-beige: #FCFFE7;
-  --background-grey: #97acc0;
+  --background-grey: #bdc8d3;
+  --background-greyy: #97acc0;
   --foreground: black;
   --blue: #27f1ff;
   --blue-hover: #25E3F0;
@@ -33,17 +34,11 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  cursor: url("/normal.cur"), auto;
 }
 
 a {
   text-decoration: none;
   color: inherit;
-}
-
-input,
-button {
-  font-family: var(--font-roboto-mono), Arial, sans-serif;
 }
 
 .btn {

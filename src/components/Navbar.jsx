@@ -62,7 +62,7 @@ export default function Navbar() {
           );
           setEmailLog("");
           setPasswordLog("");
-          navigate(data.user.role === "admin" ? "/addProduct" : "/products");
+          navigate(data.user.role === "admin" ? "/addProduct" : "/");
         } else {
           setErrorMessageLog("Invalid credentials");
         }
@@ -84,6 +84,7 @@ export default function Navbar() {
       localStorage.clear(); // Force la suppression du cache Redux Persist
       sessionStorage.clear();
       setIsLoginMenuOpen(false);
+      navigate("/");
     } catch (error) {
       console.error("Signout failed:", error);
     }

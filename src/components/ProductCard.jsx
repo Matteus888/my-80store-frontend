@@ -1,7 +1,7 @@
 import styles from "../styles/productCard.module.css";
 import PropTypes from "prop-types";
 import Alert from "./Alert";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AddShoppingCartTwoTone } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +12,14 @@ export default function ProductCard({ imageUrls, name, brand, description, price
   const [isHovered, setIsHovered] = useState({ left: false, right: false });
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setIsAdmin(user?.role === "admin");
+  }, [user]);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? imageUrls.length - 1 : prevIndex - 1));
@@ -76,10 +81,14 @@ export default function ProductCard({ imageUrls, name, brand, description, price
           <p className={styles.description}>{description}</p>
         </Link>
         <div className={styles.addToCartContainer}>
-          <p className={styles.price}>Price: {price}€</p>
-          <button className={`btn ${styles.addBtn}`} onClick={handleAddToCart}>
-            <AddShoppingCartTwoTone style={{ fontSize: 22 }} />
-          </button>
+          <p className={styles.price}>
+            <span className={styles.priceSpan}>Price:</span> {price}€
+          </p>
+          {!isAdmin && (
+            <button className={`btn ${styles.addBtn}`} onClick={handleAddToCart}>
+              <AddShoppingCartTwoTone style={{ fontSize: 22 }} />
+            </button>
+          )}
         </div>
       </div>
       {message && <Alert title="Info" onClose={() => setMessage("")} content={message} color="var(--dark-blue)" autoClose />}

@@ -7,10 +7,113 @@
 
 .container {
   display: flex;
-  width: 95%;
+  flex-direction: column;
+  gap: 20px;
+  width: 960px;
   height: 95%;
   margin: 30px 0;
-  padding: 20px;
+  padding: 40px;
   background-color: var(--background);
   border: 1px solid black;
+}
+
+h2 {
+  text-align: center;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+.addressContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.textContainer {
+  border: 1px solid black;
+  background-color: white;
+  padding: 10px;
+  width: 600px;
+}
+
+.addressName {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.addressInfos {
+  text-decoration: underline;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.addressBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 100px;
+  padding: 2px;
+}
+
+.addSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addText {
+  text-align: start;
+}
+
+.form {
+  display: flex;
+  gap: 20px;
+
+  p {
+    margin-top: 5px;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+.input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 2px solid #808080;
+  outline: none;
+  color: black;
+  font-size: 16px;
+  box-shadow: inset -2px -2px 0px white, inset 2px 2px 0px black;
+
+  &:focus {
+    border: 2px solid red;
+    background-color: white;
+  }
+
+  &:hover {
+    cursor: text;
+  }
+}
+
+.addBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

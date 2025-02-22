@@ -127,7 +127,7 @@ export default function Connection() {
           );
           setEmailLog("");
           setPasswordLog("");
-          navigate(data.user.role === "admin" ? "/addProduct" : "/products");
+          navigate(data.user.role === "admin" ? "/addProduct" : "/");
         } else {
           setErrorMessageLog("Invalid credentials");
         }
