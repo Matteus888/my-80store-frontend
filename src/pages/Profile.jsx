@@ -138,7 +138,7 @@ export default function Profile() {
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        <h2>My Profile</h2>
+        <p className={styles.title}>My Profile</p>
         {infos && (
           <>
             <div>

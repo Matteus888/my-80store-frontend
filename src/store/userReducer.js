@@ -7,10 +7,10 @@ const initialState = {
     publicId: null,
     role: null,
     expiresAt: null,
-  },
-  cart: {
-    items: [],
-    totalPrice: 0,
+    cart: {
+      items: [],
+      totalPrice: 0,
+    },
   },
 };
 
@@ -26,19 +26,19 @@ const userSlice = createSlice({
       state.user.role = role;
       state.user.expiresAt = Date.now() + 24 * 60 * 60 * 1000; // 1 jour
 
-      state.cart.items = cart?.items || [];
-      state.cart.totalPrice = cart?.totalPrice || 0;
+      state.user.cart.items = cart?.items || [];
+      state.user.cart.totalPrice = cart?.totalPrice || 0;
     },
     logout: (state) => {
-      state.user = initialState.user;
-      state.cart = initialState.cart;
+      state.user = { ...initialState.user };
     },
     updateCart: (state, action) => {
-      state.cart = action.payload;
+      state.user.cart.items = action.payload.items || [];
+      state.user.cart.totalPrice = action.payload.totalPrice || 0;
     },
     clearCart: (state) => {
-      state.cart.items = [];
-      state.cart.totalPrice = 0;
+      state.user.cart.items = [];
+      state.user.cart.totalPrice = 0;
     },
   },
 });
@@ -51,7 +51,7 @@ export const loginAndFetchCart = (userData) => async (dispatch) => {
     });
     if (res.ok) {
       const cartData = await res.json();
-      dispatch(login({ ...userData, cart: { items: cartData.cart.items || [], totalPrice: cartData.cart.totalPrice || 0 } }));
+      dispatch(login({ ...userData, cart: { items: cartData.cart?.items || [], totalPrice: cartData.cart?.totalPrice || 0 } }));
     } else {
       dispatch(login({ ...userData, cart: { items: [], totalPrice: 0 } }));
     }

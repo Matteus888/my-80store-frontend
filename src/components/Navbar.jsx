@@ -24,8 +24,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.user);
-  const cartItems = useSelector((state) => state.user.cart?.items || []);
-  const cartTotalPrice = useSelector((state) => state.user.cart?.totalPrice || 0);
+  const { cart } = user;
 
   const handleLoginSubmit = async () => {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -113,9 +112,6 @@ export default function Navbar() {
             <Link to="/addproduct" className={`btn ${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
               Add Product
             </Link>
-            {/* <Link to="/updateproduct" className={`btn ${styles.link} ${location.pathname === "/updateproduct" ? styles.activeLink : ""}`}>
-              Update Product
-            </Link> */}
           </>
         )}
       </div>
@@ -138,8 +134,8 @@ export default function Navbar() {
             {isCartDropdownOpen && (
               <div className={styles.dropdownMenu}>
                 <p className={styles.dropdownTxt}>{user.firstname}&apos;s cart</p>
-                {cartItems.length > 0 ? (
-                  cartItems.map((item) => (
+                {cart.items.length > 0 ? (
+                  cart.items.map((item) => (
                     <ProductMiniCard
                       key={item.product.slug}
                       name={item.product.name}
@@ -151,7 +147,7 @@ export default function Navbar() {
                 ) : (
                   <p>Cart is empty</p>
                 )}
-                {cartTotalPrice !== 0 && <p className={styles.totalPrice}>Total: {cartTotalPrice}€</p>}
+                {cart.totalPrice !== 0 && <p className={styles.totalPrice}>Total: {cart.totalPrice}€</p>}
                 <Link to="/cart" className={`btn ${styles.dropdownBtn}`}>
                   <ShoppingCartTwoTone style={{ fontSize: 18 }} />
                   Got to my cart
