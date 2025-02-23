@@ -9,11 +9,8 @@ export default function Profile() {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isNewAddressModalOpen, setIsNewAddressModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const [newStreet, setNewStreet] = useState("");
-  const [newCity, setNewCity] = useState("");
-  const [newPostalCode, setNewPostalCode] = useState("");
-  const [newCountry, setNewCountry] = useState("");
 
   useEffect(() => {
     const getProfileData = async () => {
@@ -111,13 +108,13 @@ export default function Profile() {
     setIsConfirmModalOpen(true);
   };
 
-  const handleAddNewAdress = async () => {
+  const handleAddNewAdress = async (newAddress) => {
     try {
       const res = await fetch("http://localhost:3000/users/addAddress/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ street: newStreet, city: newCity, postalCode: newPostalCode, country: newCountry }),
+        body: JSON.stringify(newAddress),
       });
       if (!res.ok) {
         const errorData = await res.json();
@@ -129,21 +126,10 @@ export default function Profile() {
 
       setInfos((prevInfos) => ({
         ...prevInfos,
-        addresses: [
-          ...prevInfos.addresses,
-          {
-            street: newStreet,
-            city: newCity,
-            postalCode: newPostalCode,
-            country: newCountry,
-          },
-        ],
+        addresses: [...prevInfos.addresses, newAddress],
       }));
 
-      setNewStreet("");
-      setNewCity("");
-      setNewPostalCode("");
-      setNewCountry("");
+      setIsNewAddressModalOpen(false);
     } catch (err) {
       console.error("Error adding new address:", err);
     }
@@ -199,52 +185,11 @@ export default function Profile() {
                 </div>
               ))}
             </div>
-            <p>
-              <span className={styles.label}>New address:</span>
-            </p>
-            <div className={styles.addSection}>
-              <div className={styles.form}>
-                <div className={styles.inputContainer}>
-                  <p>Street:</p>
-                  <input
-                    className={styles.input}
-                    type="text"
-                    placeholder="Enter number & street name"
-                    value={newStreet}
-                    onChange={(e) => setNewStreet(e.target.value)}
-                  />
-                  <p>City:</p>
-                  <input
-                    className={styles.input}
-                    type="text"
-                    placeholder="Enter city name"
-                    value={newCity}
-                    onChange={(e) => setNewCity(e.target.value)}
-                  />
-                  <p>Postal Code:</p>
-                  <input
-                    className={styles.input}
-                    type="text"
-                    placeholder="Enter postal code"
-                    value={newPostalCode}
-                    onChange={(e) => setNewPostalCode(e.target.value)}
-                  />
-                  <p>Country:</p>
-                  <input
-                    className={styles.input}
-                    type="text"
-                    placeholder="Enter country"
-                    value={newCountry}
-                    onChange={(e) => setNewCountry(e.target.value)}
-                  />
-                </div>
-                <div className={`${styles.btnContainer} ${styles.addBtn}`}>
-                  <button className={`btn ${styles.addressBtn}`} onClick={handleAddNewAdress}>
-                    <AddHomeWorkTwoTone style={{ fontSize: 22 }} />
-                    Add new address
-                  </button>
-                </div>
-              </div>
+            <div className={styles.addBtn}>
+              <button className={`btn ${styles.addressBtn}`} onClick={() => setIsNewAddressModalOpen(true)}>
+                <AddHomeWorkTwoTone style={{ fontSize: 22 }} />
+                Add new address
+              </button>
             </div>
           </>
         )}
@@ -265,6 +210,14 @@ export default function Profile() {
           btnTxt="Confirm address update"
           onPressBtn={handleUpdateAddress}
           address={selectedAddress}
+        />
+      )}
+      {isNewAddressModalOpen && (
+        <UpdateAddressModal
+          title="New address"
+          onCloseModal={() => setIsNewAddressModalOpen(false)}
+          btnTxt="Add new address"
+          onPressBtn={handleAddNewAdress}
         />
       )}
     </div>
