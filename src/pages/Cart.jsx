@@ -4,7 +4,7 @@ import styles from "../styles/cart.module.css";
 import { Link } from "react-router-dom";
 import Alert from "../components/Alert";
 import ConfirmationModal from "../components/ConfirmationModal";
-import { DeleteTwoTone, DeleteForeverTwoTone } from "@mui/icons-material";
+import { DeleteTwoTone, DeleteForeverTwoTone, ShoppingCartCheckoutTwoTone } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCart, clearCart } from "../store/userReducer";
 
@@ -73,7 +73,11 @@ export default function Cart() {
       });
       const data = await res.json();
       if (res.ok) {
-        dispatch(updateCart(data.cart));
+        if (!data.cart || data.cart.items.length === 0) {
+          dispatch(clearCart());
+        } else {
+          dispatch(updateCart(data.cart));
+        }
         setUpdateTrigger((prev) => !prev);
         setMessage(data.message);
       }
@@ -102,6 +106,7 @@ export default function Cart() {
   return (
     <div className={styles.main}>
       <div className={styles.container}>
+        <p className={styles.title}>My Cart</p>
         {productsList.items?.length > 0 ? (
           productsList.items.map((item, i) => (
             <div key={i} className={styles.itemContainer}>
@@ -166,6 +171,10 @@ export default function Cart() {
             <button className={`btn ${styles.emptyBtn}`} onClick={() => setConfirmationMessage("Are you sure to empty your cart?")}>
               <DeleteForeverTwoTone style={{ color: "red", fontSize: 22 }} />
               Empty cart
+            </button>
+            <button className={`btn ${styles.checkoutBtn}`} onClick={() => navigate("/order")}>
+              <ShoppingCartCheckoutTwoTone style={{ fontSize: 22 }} />
+              Got to order
             </button>
           </div>
         )}

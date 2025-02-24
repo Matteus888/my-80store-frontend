@@ -1,3 +1,5 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +11,12 @@ import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
+import Order from "./pages/Order";
+import Payment from "./pages/Payment";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export default function App() {
   const dispatch = useDispatch();
@@ -29,18 +35,22 @@ export default function App() {
   }, [expiresAt, dispatch]);
 
   return (
-    <BrowserRouter>
-      <Header />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/product/:slug" element={<Product />} />
-        <Route path="/addproduct" element={<AddProduct />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/connect" element={<Connection />} />
-      </Routes>
-    </BrowserRouter>
+    <Elements stripe={stripePromise}>
+      <BrowserRouter>
+        <Header />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/product/:slug" element={<Product />} />
+          <Route path="/addproduct" element={<AddProduct />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/connect" element={<Connection />} />
+        </Routes>
+      </BrowserRouter>
+    </Elements>
   );
 }
