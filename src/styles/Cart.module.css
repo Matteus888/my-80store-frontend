@@ -127,10 +127,28 @@
   align-items: flex-end;
 }
 
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.checkoutBtn {
+  font-size: 16px;
+  width: 150px;
+  padding: 4px 5px;
+  gap: 12px;
+}
+
+.emptyBtn {
+  font-size: 10px;
+  width: 80px;
+  padding: 2px;
+}
+
 .emptyBtn,
 .checkoutBtn {
   display: flex;
   align-items: center;
-  padding: 3px;
   margin-top: 5px;
 }

@@ -84,19 +84,38 @@
 .addressItem {
   margin-bottom: 10px;
   border: 1px solid black;
-  padding: 10px;
+  padding: 5px 15px;
 
   label {
     display: flex;
+    align-items: center;
     cursor: pointer;
-    gap: 10px;
+    gap: 15px;
   }
+}
+
+.checked {
+  outline: 1px solid black;
 }
 
 input[type="radio"] {
   cursor: pointer;
-  transform: scale(1.2);
-  accent-color: var(--pink);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid black;
+  border-radius: 50%;
+
+  &:checked {
+    background-color: var(--pink);
+  }
+}
+
+.emptyTxt {
+  margin: 20px 0 40px 0;
+  text-align: center;
 }
 
 .addressBtn {
@@ -108,9 +127,16 @@ input[type="radio"] {
   padding: 2px;
 }
 
+.line {
+  width: 70%;
+  height: 1px;
+  background-color: black;
+  margin: 10px auto 0 auto;
+}
+
 .validateContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .validateBtn {

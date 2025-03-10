@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/order.module.css";
 import { useSelector } from "react-redux";
-import { AddHomeWorkTwoTone, CreditCardTwoTone } from "@mui/icons-material";
+import { AddHomeWorkTwoTone, CreditCardTwoTone, ShoppingCartTwoTone } from "@mui/icons-material";
 import UpdateAddressModal from "../components/UpdateAddressModal";
 import Alert from "../components/Alert";
 import { useNavigate } from "react-router-dom";
@@ -102,8 +102,9 @@ export default function Order() {
       }
 
       const data = await res.json();
-      console.log("Order placed:", data.message);
-      navigate("/payment");
+
+      const orderId = data.order._id;
+      navigate(`/payment?orderId=${orderId}`);
     } catch (error) {
       console.error("Error placing order:", error);
     }
@@ -127,7 +128,7 @@ export default function Order() {
                   </div>
                 ))
               ) : (
-                <p>Your cart is empty</p>
+                <p className={styles.emptyTxt}>Your cart is empty</p>
               )}
             </div>
             <p className={styles.totalPrice}>
@@ -139,7 +140,7 @@ export default function Order() {
             {addresses.length > 0 ? (
               <ul className={styles.addressList}>
                 {addresses.map((address, i) => (
-                  <li key={i} className={styles.addressItem}>
+                  <li key={i} className={`${styles.addressItem} ${selectedAddress === i && styles.checked}`}>
                     <label>
                       <input
                         type="radio"
@@ -160,7 +161,7 @@ export default function Order() {
                 ))}
               </ul>
             ) : (
-              <p>No saved addresses found.</p>
+              <p className={styles.emptyTxt}>No saved addresses found.</p>
             )}
             <div className={styles.addBtn}>
               <button className={`btn ${styles.addressBtn}`} onClick={() => setIsNewAddressModalOpen(true)}>
@@ -170,7 +171,12 @@ export default function Order() {
             </div>
           </div>
         </div>
+        <div className={styles.line}></div>
         <div className={styles.validateContainer}>
+          <button className={`btn ${styles.validateBtn}`} onClick={() => navigate("/cart")}>
+            <ShoppingCartTwoTone style={{ fontSize: 22 }} />
+            Go back to cart
+          </button>
           <button
             className={`btn ${styles.validateBtn}`}
             onClick={handlePlaceOrder}

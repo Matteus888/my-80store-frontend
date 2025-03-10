@@ -18,7 +18,6 @@ export default function Cart() {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const cartTotalPrice = useSelector((state) => state.user.cart?.totalPrice || 0);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -166,16 +165,18 @@ export default function Cart() {
           <div className={styles.totalContainer}>
             <p className={styles.price}>
               <span className={styles.priceSpan}>Total cart:</span>
-              {cartTotalPrice}€
+              {productsList.totalPrice}€
             </p>
-            <button className={`btn ${styles.emptyBtn}`} onClick={() => setConfirmationMessage("Are you sure to empty your cart?")}>
-              <DeleteForeverTwoTone style={{ color: "red", fontSize: 22 }} />
-              Empty cart
-            </button>
-            <button className={`btn ${styles.checkoutBtn}`} onClick={() => navigate("/order")}>
-              <ShoppingCartCheckoutTwoTone style={{ fontSize: 22 }} />
-              Got to order
-            </button>
+            <div className={styles.btnContainer}>
+              <button className={`btn ${styles.checkoutBtn}`} onClick={() => navigate("/order")}>
+                <ShoppingCartCheckoutTwoTone style={{ fontSize: 22 }} />
+                Got to order
+              </button>
+              <button className={`btn ${styles.emptyBtn}`} onClick={() => setConfirmationMessage("Are you sure to empty your cart?")}>
+                <DeleteForeverTwoTone style={{ color: "red", fontSize: 18 }} />
+                Empty cart
+              </button>
+            </div>
           </div>
         )}
       </div>
