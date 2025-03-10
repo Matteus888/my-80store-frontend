@@ -145,7 +145,7 @@ export default function Navbar() {
                     />
                   ))
                 ) : (
-                  <p>Cart is empty</p>
+                  <p className={styles.emptyCartTxt}>Cart is empty</p>
                 )}
                 {cart.totalPrice !== 0 && <p className={styles.totalPrice}>Total: {cart.totalPrice}€</p>}
                 <Link to="/cart" className={`btn ${styles.dropdownBtn}`}>

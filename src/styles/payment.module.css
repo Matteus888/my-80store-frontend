@@ -4,3 +4,63 @@
   align-items: center;
   width: 100%;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 1240px;
+  height: 95%;
+  margin: 30px 0;
+  padding: 20px 30px;
+  background-color: var(--background);
+  border: 1px solid black;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.orderContainer,
+.userContainer {
+  width: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid black;
+  background-color: white;
+  padding: 10px 20px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid black;
+}
+
+.line {
+  width: 70%;
+  height: 1px;
+  background-color: black;
+  margin: 10px auto 0 auto;
+}
+
+.validateContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.validateBtn {
+  width: 170px;
+  padding: 5px 10px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}

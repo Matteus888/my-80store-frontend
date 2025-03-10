@@ -1,11 +1,15 @@
 import styles from "../styles/payment.module.css";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { HomeTwoTone, CreditCardTwoTone } from "@mui/icons-material";
 
 export default function Payment() {
-  const [sessionId, setSessionId] = useState(null);
   const [orderId, setOrderId] = useState(null);
+  const [order, setOrder] = useState(null);
+  const [customerInfo, setCustomerInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -15,43 +19,117 @@ export default function Payment() {
   }, [location]);
 
   useEffect(() => {
-    const createCheckoutSession = async () => {
+    const fetchOrder = async () => {
       if (!orderId) return;
 
       try {
-        const res = await fetch("http://localhost:3000/payments/", {
-          method: "POST",
+        const res = await fetch(`http://localhost:3000/orders/${orderId}`, {
+          method: "GET",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ orderId }),
         });
-        const data = await res.json();
-        if (data.id) {
-          setSessionId(data.id);
+        if (res.ok) {
+          const data = await res.json();
+          setOrder(data.order);
+          setCustomerInfo(data.customerInfo);
+        } else {
+          console.error("Error fetching order:", await res.json());
         }
       } catch (error) {
-        console.error("Error getting payment:", error);
+        console.error("Error getting order:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    createCheckoutSession();
+    fetchOrder();
   }, [orderId]);
 
-  const handleCheckout = () => {
-    if (sessionId) {
-      const stripe = window.Stripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-      stripe.redirectToCheckout({ sessionId }).then((result) => {
-        if (result.error) {
-          console.error("Error during checkout:", result.error);
-        }
+  const handleCheckout = async () => {
+    if (!orderId) return;
+
+    try {
+      const res = await fetch("http://localhost:3000/payments/", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orderId }),
       });
+
+      const data = await res.json();
+
+      if (data.id) {
+        const stripe = window.Stripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+        stripe.redirectToCheckout({ sessionId: data.id }).then((result) => {
+          if (result.error) {
+            console.error("Error during checkout:", result.error);
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Error creating payment session:", error);
     }
   };
 
   return (
     <div className={styles.main}>
-      <h2>Payment Page</h2>
-      <button onClick={handleCheckout}>Proceed to Checkout</button>
+      <div className={styles.container}>
+        <p className={styles.title}>My Payment</p>
+        <div className={styles.orderContainer}>
+          <p>Order details</p>
+          {loading ? (
+            <p>Loading order...</p>
+          ) : order ? (
+            <>
+              {order.items?.length > 0 ? (
+                order.items.map((item, i) => (
+                  <div key={`${item.product._id}-${i}`} className={styles.item}>
+                    <p>
+                      {item.product.name} <span>{item.product.brand}</span>
+                    </p>
+                    <p>
+                      {item.quantity} x {item.product.price}€
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p>Order empty</p>
+              )}
+              <p>Total: {order.totalPrice}€</p>
+            </>
+          ) : (
+            <p>Order not found</p>
+          )}
+        </div>
+        <div className={styles.userContainer}>
+          <p>User details</p>
+          {customerInfo ? (
+            <>
+              <p>Name: {customerInfo.name}</p>
+              <p>Email: {customerInfo.email}</p>
+              <p>Address:</p>
+              <p>{customerInfo.address.street}</p>
+              <p>
+                {customerInfo.address.city}, {customerInfo.address.postalCode}
+              </p>
+              <p>{customerInfo.address.country}</p>
+            </>
+          ) : (
+            <p>Loading user info...</p>
+          )}
+        </div>
+        <div className={styles.line}></div>
+        <div className={styles.validateContainer}>
+          <button className={`btn ${styles.validateBtn}`} onClick={() => navigate("/order")}>
+            <HomeTwoTone style={{ fontSize: 22 }} />
+            Go back to order
+          </button>
+          <button className={`btn ${styles.validateBtn}`} onClick={handleCheckout}>
+            <CreditCardTwoTone style={{ fontSize: 22 }} />
+            Go to Payment
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

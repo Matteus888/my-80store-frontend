@@ -1,11 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../store/userReducer";
 
 export default function PaymentSuccess() {
   const [paymentStatus, setPaymentStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const hasFetched = useRef(false);
   const location = useLocation();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (hasFetched.current) return;
@@ -16,9 +20,6 @@ export default function PaymentSuccess() {
       const sessionId = queryParams.get("session_id");
 
       if (sessionId) {
-        console.log("Fetching payment verification for session:", sessionId);
-
-        // Vérifier la session Stripe pour obtenir son statut
         try {
           const res = await fetch(`http://localhost:3000/payments/verify-session/${sessionId}`, {
             method: "GET",
@@ -29,6 +30,7 @@ export default function PaymentSuccess() {
 
           if (data.status === "paid") {
             setPaymentStatus("success");
+            dispatch(clearCart());
           } else {
             setPaymentStatus("failed");
           }
@@ -40,7 +42,7 @@ export default function PaymentSuccess() {
     };
 
     verifyPaymentStatus();
-  }, [location]);
+  }, [location, dispatch]);
 
   return (
     <div>
