@@ -24,8 +24,7 @@
   font-weight: 800;
 }
 
-.orderContainer,
-.userContainer {
+.orderContainer {
   width: 620px;
   display: flex;
   flex-direction: column;
@@ -63,21 +62,8 @@
   }
 }
 
-.line {
-  width: 70%;
-  height: 1px;
-  background-color: black;
-  margin: 10px auto 0 auto;
-}
-
-.validateContainer {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-}
-
 .validateBtn {
-  width: 170px;
+  width: 190px;
   padding: 5px 10px;
   font-size: 16px;
   display: flex;

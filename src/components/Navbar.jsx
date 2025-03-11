@@ -233,7 +233,7 @@ export default function Navbar() {
                   <SettingsTwoTone style={{ fontSize: 18 }} />
                   My profile
                 </Link>
-                <Link to="/purchase" className={`btn ${styles.dropdownBtn}`}>
+                <Link to="/purchases" className={`btn ${styles.dropdownBtn}`}>
                   <ShopTwoTwoTone style={{ fontSize: 18 }} />
                   My purchases
                 </Link>

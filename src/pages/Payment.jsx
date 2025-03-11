@@ -76,7 +76,7 @@ export default function Payment() {
       <div className={styles.container}>
         <p className={styles.title}>My Payment</p>
         <div className={styles.orderContainer}>
-          <p>Order details</p>
+          <p className={styles.sectionTitle}>Order details</p>
           {loading ? (
             <p>Loading order...</p>
           ) : order ? (
@@ -85,7 +85,7 @@ export default function Payment() {
                 order.items.map((item, i) => (
                   <div key={`${item.product._id}-${i}`} className={styles.item}>
                     <p>
-                      {item.product.name} <span>{item.product.brand}</span>
+                      {item.product.name} <span className={styles.brand}>{item.product.brand}</span>
                     </p>
                     <p>
                       {item.quantity} x {item.product.price}€
@@ -95,19 +95,19 @@ export default function Payment() {
               ) : (
                 <p>Order empty</p>
               )}
-              <p>Total: {order.totalPrice}€</p>
+              <p className={styles.totalPrice}>
+                <span>Total:</span> {order.totalPrice}€
+              </p>
             </>
           ) : (
             <p>Order not found</p>
           )}
         </div>
         <div className={styles.userContainer}>
-          <p>User details</p>
+          <p className={styles.sectionTitle}>User details</p>
           {customerInfo ? (
             <>
-              <p>Name: {customerInfo.name}</p>
-              <p>Email: {customerInfo.email}</p>
-              <p>Address:</p>
+              <p>{customerInfo.name}</p>
               <p>{customerInfo.address.street}</p>
               <p>
                 {customerInfo.address.city}, {customerInfo.address.postalCode}
