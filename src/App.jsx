@@ -15,6 +15,7 @@ import Order from "./pages/Order";
 import Payment from "./pages/Payment";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
+import Purchases from "./pages/Purchases";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<Order />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/purchases" element={<Purchases />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/payment-cancel" element={<PaymentCancel />} />
           <Route path="/connect" element={<Connection />} />
