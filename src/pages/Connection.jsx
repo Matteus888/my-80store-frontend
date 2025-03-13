@@ -207,6 +207,7 @@ export default function Connection() {
           </button>
           {errorMessage && <Alert title="Alert" onClose={handleCloseError} content={errorMessage} color="red" />}
         </div>
+        <div className={styles.verticalLine}></div>
         <div className={styles.loginSection}>
           <h2>Connect</h2>
           <form action="submit" onSubmit={async (e) => e.preventDefault()} className={styles.loginForm}>

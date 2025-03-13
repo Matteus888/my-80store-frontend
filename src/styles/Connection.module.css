@@ -9,10 +9,12 @@
 .forms {
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
-  width: 95%;
-  height: 100%;
-  margin-top: 20px;
+  align-items: center;
+  width: 940px;
+  margin: 30px 0;
+  padding: 20px 30px;
+  background-color: var(--background);
+  border: solid 1px black;
 }
 
 .registerSection,
@@ -38,7 +40,7 @@
   padding: 4px 8px;
   border: 2px solid #808080;
   outline: none;
-  background-color: var(--background);
+  background-color: white;
   color: black;
   font-size: 12px;
   box-shadow: inset -2px -2px 0px white, inset 2px 2px 0px black;
@@ -61,4 +63,10 @@
   padding: 2px 15px 4px 15px;
   margin-top: 20px;
   font-size: 16px;
+}
+
+.verticalLine {
+  width: 0.8px;
+  height: 100%;
+  background-color: black;
 }

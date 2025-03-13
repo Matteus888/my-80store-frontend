@@ -1,11 +1,14 @@
 import styles from "../styles/purchases.module.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
 export default function Purchases() {
   const [purchases, setPurchases] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPurchases = async () => {
@@ -32,9 +35,28 @@ export default function Purchases() {
     fetchPurchases();
   }, []);
 
+  const handleReorder = async (orderId) => {
+    console.log(orderId);
+    try {
+      const res = await fetch("http://localhost:3000/carts/reorder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ orderId }),
+      });
+
+      if (res.ok) {
+        navigate("/cart");
+      } else {
+        console.error("Failed to reorder items.");
+      }
+    } catch (error) {
+      console.error("Error during reorder:", error);
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  console.log(purchases);
 
   return (
     <div className={styles.main}>
@@ -47,7 +69,7 @@ export default function Purchases() {
             {purchases.map((purchase) => (
               <div key={purchase._id} className={styles.purchase}>
                 <p className={styles.purchaseId}>Order ID: {purchase._id}</p>
-                <p className={styles.purchaseDate}>Purchased on {format(new Date(purchase.updatedAt), "EEEE dd MMMM yyyy HH:mm")}</p>
+                <p className={styles.purchaseDate}>Purchased on {format(new Date(purchase.updatedAt), "EEEE dd MMMM yyyy 'at' h:mm a")}</p>
                 {purchase.items.map((item) => (
                   <div key={item.product._id} className={styles.item}>
                     <p>
@@ -58,6 +80,9 @@ export default function Purchases() {
                 <p className={styles.totalPrice}>
                   <span>Total:</span> {purchase.totalPrice}€
                 </p>
+                <button className={`btn ${styles.reorderBtn}`} onClick={() => handleReorder(purchase._id)}>
+                  Reorder
+                </button>
               </div>
             ))}
           </>
