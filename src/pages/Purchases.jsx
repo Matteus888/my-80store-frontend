@@ -36,7 +36,6 @@ export default function Purchases() {
   }, []);
 
   const handleReorder = async (orderId) => {
-    console.log(orderId);
     try {
       const res = await fetch("http://localhost:3000/carts/reorder", {
         method: "POST",

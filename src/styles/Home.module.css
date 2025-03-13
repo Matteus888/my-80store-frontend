@@ -1,3 +1,13 @@
 .main {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 1240px;
+  gap: 50px;
+  margin: 30px 0;
 }
