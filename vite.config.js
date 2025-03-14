@@ -9,20 +9,28 @@ export default defineConfig({
       "/api": {
         target: "https://my-80store-backend.vercel.app",
         changeOrigin: true,
-        secure: true, // Assure-toi que c'est en HTTPS
-        cookieDomainRewrite: "localhost", // Permet au cookie du backend d'être accepté en local
+        secure: true,
+        cookieDomainRewrite: "localhost",
       },
     },
+    // Ajoutez cette option pour le routage historique
+    historyApiFallback: true,
   },
   resolve: {
     alias: {
       "@styles": path.resolve("src/styles"),
     },
   },
-  envPrefix: "VITE_", // Exposer des variables d'environnement spécifiques
+  envPrefix: "VITE_",
   build: {
-    sourcemap: true, // Ajout des sourcemaps pour le debug
-    minify: "terser", // Utilisation de Terser pour minifier
+    sourcemap: true,
+    minify: "terser",
+    // Ajoutez cette configuration pour générer un fichier _redirects pour les SPA
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
-  base: "/", // Change cette valeur si ton projet est dans un sous-dossier
+  base: "/", // Correct pour un déploiement à la racine
 });
