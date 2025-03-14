@@ -1,4 +1,4 @@
-import styles from "../styles/paymentSuccess.module.css";
+import styles from "@styles/paymentSuccess.module.css";
 import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";

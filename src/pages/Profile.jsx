@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/profile.module.css";
+import styles from "@styles/profile.module.css";
 import { ChangeCircleTwoTone, DeleteForeverTwoTone, AddHomeWorkTwoTone } from "@mui/icons-material";
 import UpdateAddressModal from "../components/UpdateAddressModal";
 import ConfirmationModal from "../components/ConfirmationModal";

@@ -1,4 +1,4 @@
-import styles from "../styles/updateAddressModal.module.css";
+import styles from "@styles/updateAddressModal.module.css";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 

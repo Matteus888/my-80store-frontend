@@ -1,4 +1,4 @@
-import styles from "../styles/connection.module.css";
+import styles from "@styles/connection.module.css";
 import Alert from "../components/Alert";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";

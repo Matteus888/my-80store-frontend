@@ -1,4 +1,4 @@
-import styles from "../styles/products.module.css";
+import styles from "@styles/products.module.css";
 import CategoryBar from "../components/CategoryBar";
 import FilterBar from "../components/FilterBar";
 import ProductCard from "../components/ProductCard";

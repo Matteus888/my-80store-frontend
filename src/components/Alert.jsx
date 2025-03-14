@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import styles from "../styles/alert.module.css";
+import styles from "@styles/alert.module.css";
 import PropTypes from "prop-types";
 
 export default function Alert({ title, onClose, content, color, autoClose = false }) {

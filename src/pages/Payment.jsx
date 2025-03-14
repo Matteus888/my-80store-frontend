@@ -1,4 +1,4 @@
-import styles from "../styles/payment.module.css";
+import styles from "@styles/payment.module.css";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HomeTwoTone, CreditCardTwoTone } from "@mui/icons-material";

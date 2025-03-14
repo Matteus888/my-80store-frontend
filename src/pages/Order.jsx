@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/order.module.css";
+import styles from "@styles/order.module.css";
 import { useSelector } from "react-redux";
 import { AddHomeWorkTwoTone, CreditCardTwoTone, ShoppingCartTwoTone } from "@mui/icons-material";
 import UpdateAddressModal from "../components/UpdateAddressModal";

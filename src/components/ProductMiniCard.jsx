@@ -1,4 +1,4 @@
-import styles from "../styles/productMiniCard.module.css";
+import styles from "@styles/productMiniCard.module.css";
 import PropTypes from "prop-types";
 
 export default function ProductMiniCard({ name, imageUrl, quantity, price }) {

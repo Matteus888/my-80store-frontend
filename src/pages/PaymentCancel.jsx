@@ -1,4 +1,4 @@
-import styles from "../styles/paymentCancel.module.css";
+import styles from "@styles/paymentCancel.module.css";
 import { useNavigate } from "react-router-dom";
 import { CreditCardTwoTone } from "@mui/icons-material";
 
