@@ -2,12 +2,14 @@ import styles from "../styles/payment.module.css";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HomeTwoTone, CreditCardTwoTone } from "@mui/icons-material";
+import Alert from "../components/Alert";
 
 export default function Payment() {
   const [orderId, setOrderId] = useState(null);
   const [order, setOrder] = useState(null);
   const [customerInfo, setCustomerInfo] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,6 +21,10 @@ export default function Payment() {
   }, [location]);
 
   useEffect(() => {
+    setAlertMessage(
+      "This is an exercice website which doesn't really sell products. If you click on Payment, you can go to Stripe platform but don't use real credit card number. You can use this test credit card number 4242 4242 4242 4242 to complete a fake payment."
+    );
+
     const fetchOrder = async () => {
       if (!orderId) return;
 
@@ -130,6 +136,7 @@ export default function Payment() {
           </button>
         </div>
       </div>
+      {alertMessage && <Alert title="Alert" onClose={() => setAlertMessage("")} content={alertMessage} color="red" />}
     </div>
   );
 }
