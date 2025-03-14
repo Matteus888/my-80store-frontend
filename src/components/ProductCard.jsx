@@ -32,7 +32,7 @@ export default function ProductCard({ imageUrls, name, brand, description, price
   const handleAddToCart = async () => {
     if (user.publicId) {
       try {
-        const res = await fetch("http://localhost:3000/carts/add", {
+        const res = await fetch("https://my-80store-backend.vercel.app/carts/add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",

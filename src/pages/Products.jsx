@@ -17,7 +17,7 @@ export default function Products() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let url = `http://localhost:3000/products?page=${currentPage}&limit=12`;
+        let url = `https://my-80store-backend.vercel.app/products?page=${currentPage}&limit=12`;
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;
         }

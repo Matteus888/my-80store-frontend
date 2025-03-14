@@ -13,7 +13,7 @@ export default function Purchases() {
   useEffect(() => {
     const fetchPurchases = async () => {
       try {
-        const res = await fetch("http://localhost:3000/orders/paid", {
+        const res = await fetch("https://my-80store-backend.vercel.app/orders/paid", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -37,7 +37,7 @@ export default function Purchases() {
 
   const handleReorder = async (orderId) => {
     try {
-      const res = await fetch("http://localhost:3000/carts/reorder", {
+      const res = await fetch("https://my-80store-backend.vercel.app/carts/reorder", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

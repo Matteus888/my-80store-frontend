@@ -29,7 +29,7 @@ export default function Payment() {
       if (!orderId) return;
 
       try {
-        const res = await fetch(`http://localhost:3000/orders/${orderId}`, {
+        const res = await fetch(`https://my-80store-backend.vercel.app/orders/${orderId}`, {
           method: "GET",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ export default function Payment() {
     if (!orderId) return;
 
     try {
-      const res = await fetch("http://localhost:3000/payments/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/payments/", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

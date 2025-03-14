@@ -22,7 +22,7 @@ export default function Cart() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await fetch("http://localhost:3000/carts/", {
+        const res = await fetch("https://my-80store-backend.vercel.app/carts/", {
           method: "GET",
           credentials: "include",
         });
@@ -43,7 +43,7 @@ export default function Cart() {
 
   const handleUpdateQuantity = async (slug, newQuantity) => {
     try {
-      const res = await fetch("http://localhost:3000/carts/update", {
+      const res = await fetch("https://my-80store-backend.vercel.app/carts/update", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -65,7 +65,7 @@ export default function Cart() {
 
   const handleRemoveItem = async (slug) => {
     try {
-      const res = await fetch(`http://localhost:3000/carts/${slug}`, {
+      const res = await fetch(`https://my-80store-backend.vercel.app/carts/${slug}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -87,7 +87,7 @@ export default function Cart() {
 
   const handleEmptyCart = async () => {
     try {
-      const res = await fetch("http://localhost:3000/carts/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/carts/", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

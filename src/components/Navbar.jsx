@@ -42,7 +42,7 @@ export default function Navbar() {
       setErrorMessageLog("");
 
       try {
-        const res = await fetch("http://localhost:3000/users/login", {
+        const res = await fetch("https://my-80store-backend.vercel.app/users/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -75,7 +75,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     setIsModalOpen(false);
     try {
-      await fetch("http://localhost:3000/users/logout", {
+      await fetch("https://my-80store-backend.vercel.app/users/logout", {
         method: "POST",
         credentials: "include",
       });

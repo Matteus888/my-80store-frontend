@@ -21,7 +21,7 @@ export default function Order() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await fetch("http://localhost:3000/carts/", {
+        const res = await fetch("https://my-80store-backend.vercel.app/carts/", {
           method: "GET",
           credentials: "include",
         });
@@ -36,7 +36,7 @@ export default function Order() {
 
     const fetchAddress = async () => {
       try {
-        const res = await fetch("http://localhost:3000/users/addresses", {
+        const res = await fetch("https://my-80store-backend.vercel.app/users/addresses", {
           method: "GET",
           credentials: "include",
         });
@@ -61,7 +61,7 @@ export default function Order() {
 
   const handleAddNewAdress = async (newAddress) => {
     try {
-      const res = await fetch("http://localhost:3000/users/addAddress/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/users/addAddress/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -90,7 +90,7 @@ export default function Order() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/orders/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/orders/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
