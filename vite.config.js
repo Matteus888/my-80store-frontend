@@ -13,4 +13,15 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      "@": "/src", // Exemple d'alias
+    },
+  },
+  envPrefix: "VITE_", // Exposer des variables d'environnement spécifiques
+  build: {
+    sourcemap: true, // Ajout des sourcemaps pour le debug
+    minify: "terser", // Utilisation de Terser pour minifier
+  },
+  base: "/", // Change cette valeur si ton projet est dans un sous-dossier
 });
