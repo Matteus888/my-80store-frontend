@@ -1,4 +1,4 @@
-import styles from "../styles/home.module.css";
+import styles from "@styles/home.module.css";
 import HomeCard from "../components/HomeCard";
 import { useEffect, useState } from "react";
 

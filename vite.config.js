@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import path from "path";
 
 export default defineConfig({
   plugins: [react()],
@@ -15,7 +16,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": "/src", // Exemple d'alias
+      "@styles": path.resolve("src/styles"),
     },
   },
   envPrefix: "VITE_", // Exposer des variables d'environnement spécifiques
