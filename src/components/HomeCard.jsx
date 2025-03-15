@@ -18,7 +18,7 @@ export default function HomeCard({ category, products }) {
   if (!products || products.length === 0) {
     return (
       <div className={`${styles.card} ${styles.loading}`}>
-        <LoopTwoTone style={{ fontSize: 50 }} />
+        <LoopTwoTone className={styles.spinner} style={{ fontSize: 50 }} />
       </div>
     );
   }

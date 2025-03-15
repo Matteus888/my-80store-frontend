@@ -15,6 +15,20 @@
   align-items: center;
 }
 
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .category {
   font-size: 18px;
   font-weight: 600;
