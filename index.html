@@ -2,6 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    // Ajoutez ce script temporairement à votre index.html
+    <script>
+      console.log("CSP Diagnostic:");
+      // Vérifier les balises meta
+      document.querySelectorAll("meta").forEach((meta) => {
+        if (meta.httpEquiv && meta.httpEquiv.toLowerCase() === "content-security-policy") {
+          console.log("CSP Meta Tag:", meta.content);
+        }
+      });
+
+      // Vérifier si la CSP est appliquée via JS
+      setTimeout(() => {
+        const style = document.createElement("style");
+        try {
+          style.textContent = '@font-face { font-family: "Test"; src: url("data:,") }';
+          document.head.appendChild(style);
+          console.log("Inline font-src data: est autorisé");
+        } catch (e) {
+          console.log("CSP bloque les fonts inline:", e);
+        }
+      }, 0);
+    </script>
     <link rel="icon" type="image" href="./src/assets/1980logo.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
