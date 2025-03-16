@@ -24,7 +24,7 @@ Avant de lancer le projet, assurez-vous d'avoir les outils suivants installés :
 
 1. Clonez ce repository :
    ```bash
-   git clone https://github.com/votre-utilisateur/my-80s-store-frontend.git
+   git clone https://github.com/Matteus888/my-80s-store-frontend.git
    ```
 2. Accédez au dossier du projet :
    ```bash
