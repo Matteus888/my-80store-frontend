@@ -2,6 +2,11 @@
 
 Bienvenue dans le repository frontend de **My 80's Store**, une boutique en ligne proposant des objets vintage emblématiques des années 80-90 : jeux vidéo, consoles, vêtements, VHS, etc.
 
+## Aperçu des pages
+
+Voici un aperçu de la page Home :
+![Home](/public/Home.png)
+
 ## Prérequis
 
 Avant de lancer le projet, assurez-vous d'avoir les outils suivants installés :
