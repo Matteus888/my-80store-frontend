@@ -7,6 +7,12 @@ Bienvenue dans le repository frontend de **My 80's Store**, une boutique en lign
 Voici un aperçu de la page Home :
 ![Home](/public/home.png)
 
+Voici un aperçu de la page Products :
+![Products](/public/products.png)
+
+Voici un aperçu de la page Product :
+![Product](/public/product.png)
+
 ## Prérequis
 
 Avant de lancer le projet, assurez-vous d'avoir les outils suivants installés :
