@@ -5,7 +5,7 @@ Bienvenue dans le repository frontend de **My 80's Store**, une boutique en lign
 ## Aperçu des pages
 
 Voici un aperçu de la page Home :
-![Home](/public/Home.png)
+![Home](/public/home.png)
 
 ## Prérequis
 
