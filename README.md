@@ -103,8 +103,3 @@ Les contributions sont les bienvenues ! Pour contribuer :
 3. Commitez vos changements : `git commit -m "Ajout de ma fonctionnalité"`
 4. Poussez votre branche : `git push origin ma-fonctionnalite`
 5. Créez une Pull Request
-
-## Licence
-
-Ce projet est sous licence **MIT**. Voir le fichier [LICENSE](./LICENSE) pour plus de détails.
-
