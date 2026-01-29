@@ -15,7 +15,7 @@ export default function Profile() {
   useEffect(() => {
     const getProfileData = async () => {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/api/users/", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/users?action=get", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
