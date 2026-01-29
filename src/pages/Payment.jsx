@@ -29,7 +29,7 @@ export default function Payment() {
       if (!orderId) return;
 
       try {
-        const res = await fetch(`https://my-80store-backend.vercel.app/api/orders/${orderId}`, {
+        const res = await fetch(`https://my-80store-backend.vercel.app/api/orders?action=byId&id=${orderId}`, {
           method: "GET",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ export default function Payment() {
     if (!orderId) return;
 
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/api/payments/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/payments?action=create", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

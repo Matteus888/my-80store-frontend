@@ -45,7 +45,7 @@ const userSlice = createSlice({
 
 export const loginAndFetchCart = (userData) => async (dispatch) => {
   try {
-    const res = await fetch("https://my-80store-backend.vercel.app/api/carts/", {
+    const res = await fetch("https://my-80store-backend.vercel.app/api/carts?action=get", {
       method: "GET",
       credentials: "include",
     });

@@ -21,7 +21,7 @@ export default function Order() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/api/carts/", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/carts?action=get", {
           method: "GET",
           credentials: "include",
         });
@@ -90,7 +90,7 @@ export default function Order() {
     }
 
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/api/orders/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/orders?action=create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

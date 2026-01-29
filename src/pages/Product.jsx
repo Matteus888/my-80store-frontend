@@ -72,7 +72,7 @@ export default function Product() {
   const handleAddToCart = async () => {
     if (user.publicId) {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/api/carts/add", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/carts?action=add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -113,7 +113,7 @@ export default function Product() {
         imageUrls: updatedImages,
       };
 
-      const res = await fetch(`https://my-80store-backend.vercel.app/api/products?action=bySlug&slug=${slug}`, {
+      const res = await fetch(`https://my-80store-backend.vercel.app/api/products?action=update&slug=${slug}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

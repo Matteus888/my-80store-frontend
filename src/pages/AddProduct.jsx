@@ -95,7 +95,7 @@ export default function AddProduct() {
       setErrorMessage("");
 
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/api/products/", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/products?action=create", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
