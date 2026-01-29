@@ -36,7 +36,7 @@ export default function Product() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://my-80store-backend.vercel.app/api/products/${slug}`);
+        const res = await fetch(`https://my-80store-backend.vercel.app/api/products?action=bySlug&slug=${slug}`);
         if (!res.ok) {
           throw new Error("Product not found");
         }
@@ -113,7 +113,7 @@ export default function Product() {
         imageUrls: updatedImages,
       };
 
-      const res = await fetch(`https://my-80store-backend.vercel.app/api/products/${slug}`, {
+      const res = await fetch(`https://my-80store-backend.vercel.app/api/products?action=bySlug&slug=${slug}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
