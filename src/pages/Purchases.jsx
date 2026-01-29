@@ -13,7 +13,7 @@ export default function Purchases() {
   useEffect(() => {
     const fetchPurchases = async () => {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/api/orders?action=markPaid&id=paid", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/orders?action=my", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
