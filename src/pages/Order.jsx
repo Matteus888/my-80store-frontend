@@ -61,7 +61,7 @@ export default function Order() {
 
   const handleAddNewAdress = async (newAddress) => {
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/api/users?action=addAddress/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/users?action=address", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
