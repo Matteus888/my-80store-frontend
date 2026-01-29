@@ -51,7 +51,7 @@ export default function Profile() {
     };
 
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/api/users/updateAddress/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/users?action=updateAddress/", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -78,7 +78,7 @@ export default function Profile() {
 
   const handleRemoveAddress = async () => {
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/api/users/removeAddress/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/users?action=removeAddress/", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -110,7 +110,7 @@ export default function Profile() {
 
   const handleAddNewAdress = async (newAddress) => {
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/api/users/addAddress/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/users?action=addAddress/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

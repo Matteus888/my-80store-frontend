@@ -54,7 +54,7 @@ export default function Connection() {
       setErrorMessage("");
 
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/api/users/register", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/users?action=register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -108,7 +108,7 @@ export default function Connection() {
       setErrorMessageLog("");
 
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/api/users/login", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/users?action=login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
