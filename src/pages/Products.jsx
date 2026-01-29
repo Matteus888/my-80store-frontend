@@ -17,7 +17,7 @@ export default function Products() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let url = `https://my-80store-backend.vercel.app/products?page=${currentPage}&limit=12`;
+        let url = `https://my-80store-backend.vercel.app/api/products?page=${currentPage}&limit=12`;
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;
         }
@@ -84,10 +84,16 @@ export default function Products() {
         onFilterBtn={handleFilterBtn}
         filterBtn={filterBtn}
       />
-      {filterBtn && <FilterBar onSelectedSort={handleSelectedSort} onPriceChange={handlePriceChange} priceRange={priceRange} />}
+      {filterBtn && (
+        <FilterBar onSelectedSort={handleSelectedSort} onPriceChange={handlePriceChange} priceRange={priceRange} />
+      )}
       <div className={styles.container}>{products}</div>
       <div className={styles.pagination}>
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className={styles.paginationBtn}>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={styles.paginationBtn}
+        >
           <ChevronLeft />
         </button>
         {Array.from({ length: totalPages }, (_, i) => (
@@ -99,7 +105,11 @@ export default function Products() {
             {i + 1}
           </button>
         ))}
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className={styles.paginationBtn}>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={styles.paginationBtn}
+        >
           <ChevronRight />
         </button>
       </div>

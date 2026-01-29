@@ -32,7 +32,7 @@ export default function ProductCard({ imageUrls, name, brand, description, price
   const handleAddToCart = async () => {
     if (user.publicId) {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/carts/add", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/carts/add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -91,7 +91,9 @@ export default function ProductCard({ imageUrls, name, brand, description, price
           )}
         </div>
       </div>
-      {message && <Alert title="Info" onClose={() => setMessage("")} content={message} color="var(--dark-blue)" autoClose />}
+      {message && (
+        <Alert title="Info" onClose={() => setMessage("")} content={message} color="var(--dark-blue)" autoClose />
+      )}
       {errorMessage && <Alert title="Alert" onClose={() => setErrorMessage("")} content={errorMessage} color="red" />}
     </div>
   );

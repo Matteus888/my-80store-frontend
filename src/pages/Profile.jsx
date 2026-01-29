@@ -15,7 +15,7 @@ export default function Profile() {
   useEffect(() => {
     const getProfileData = async () => {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/users/", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/users/", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -51,7 +51,7 @@ export default function Profile() {
     };
 
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/users/updateAddress/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/users/updateAddress/", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -78,7 +78,7 @@ export default function Profile() {
 
   const handleRemoveAddress = async () => {
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/users/removeAddress/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/users/removeAddress/", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -110,7 +110,7 @@ export default function Profile() {
 
   const handleAddNewAdress = async (newAddress) => {
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/users/addAddress/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/users/addAddress/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

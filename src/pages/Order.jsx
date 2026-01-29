@@ -21,7 +21,7 @@ export default function Order() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/carts/", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/carts/", {
           method: "GET",
           credentials: "include",
         });
@@ -36,7 +36,7 @@ export default function Order() {
 
     const fetchAddress = async () => {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/users/addresses", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/users/addresses", {
           method: "GET",
           credentials: "include",
         });
@@ -61,7 +61,7 @@ export default function Order() {
 
   const handleAddNewAdress = async (newAddress) => {
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/users/addAddress/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/users/addAddress/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -90,7 +90,7 @@ export default function Order() {
     }
 
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/orders/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/orders/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -196,7 +196,12 @@ export default function Order() {
         />
       )}
       {isAlertOpen && (
-        <Alert title="Alert" onClose={() => setIsAlertOpen(false)} content="You need to select a shipping address" color="red" />
+        <Alert
+          title="Alert"
+          onClose={() => setIsAlertOpen(false)}
+          content="You need to select a shipping address"
+          color="red"
+        />
       )}
     </div>
   );

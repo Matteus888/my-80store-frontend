@@ -45,13 +45,15 @@ const userSlice = createSlice({
 
 export const loginAndFetchCart = (userData) => async (dispatch) => {
   try {
-    const res = await fetch("https://my-80store-backend.vercel.app/carts/", {
+    const res = await fetch("https://my-80store-backend.vercel.app/api/carts/", {
       method: "GET",
       credentials: "include",
     });
     if (res.ok) {
       const cartData = await res.json();
-      dispatch(login({ ...userData, cart: { items: cartData.cart?.items || [], totalPrice: cartData.cart?.totalPrice || 0 } }));
+      dispatch(
+        login({ ...userData, cart: { items: cartData.cart?.items || [], totalPrice: cartData.cart?.totalPrice || 0 } }),
+      );
     } else {
       dispatch(login({ ...userData, cart: { items: [], totalPrice: 0 } }));
     }

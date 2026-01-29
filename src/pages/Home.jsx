@@ -9,7 +9,7 @@ export default function Home() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/categories");
+        const res = await fetch("https://my-80store-backend.vercel.app/api/categories");
         const data = await res.json();
         setCategories(data);
       } catch (error) {
@@ -24,7 +24,7 @@ export default function Home() {
       const productsData = {};
       for (const category of categories) {
         try {
-          const res = await fetch(`https://my-80store-backend.vercel.app/products?category=${category.slug}`);
+          const res = await fetch(`https://my-80store-backend.vercel.app/api/products?category=${category.slug}`);
           const data = await res.json();
           productsData[category.slug] = data.products;
         } catch (error) {

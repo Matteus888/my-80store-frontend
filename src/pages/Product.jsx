@@ -36,7 +36,7 @@ export default function Product() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://my-80store-backend.vercel.app/products/${slug}`);
+        const res = await fetch(`https://my-80store-backend.vercel.app/api/products/${slug}`);
         if (!res.ok) {
           throw new Error("Product not found");
         }
@@ -72,7 +72,7 @@ export default function Product() {
   const handleAddToCart = async () => {
     if (user.publicId) {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/carts/add", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/carts/add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -113,7 +113,7 @@ export default function Product() {
         imageUrls: updatedImages,
       };
 
-      const res = await fetch(`https://my-80store-backend.vercel.app/products/${slug}`, {
+      const res = await fetch(`https://my-80store-backend.vercel.app/api/products/${slug}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -262,9 +262,15 @@ export default function Product() {
 
       {/* Agrandissement de l'image dans une modale */}
       {isImageModalOpen && (
-        <ImageModal productName={product.name} imageUrl={product.imageUrls[currentIndex]} onCloseModal={handleCloseModal} />
+        <ImageModal
+          productName={product.name}
+          imageUrl={product.imageUrls[currentIndex]}
+          onCloseModal={handleCloseModal}
+        />
       )}
-      {message && <Alert title="Info" onClose={() => setMessage("")} content={message} color="var(--dark-blue)" autoClose />}
+      {message && (
+        <Alert title="Info" onClose={() => setMessage("")} content={message} color="var(--dark-blue)" autoClose />
+      )}
       {errorMessage && <Alert title="Alert" onClose={() => setErrorMessage("")} content={errorMessage} color="red" />}
     </div>
   );

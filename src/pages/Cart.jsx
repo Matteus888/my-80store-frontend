@@ -22,7 +22,7 @@ export default function Cart() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/carts/", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/carts/", {
           method: "GET",
           credentials: "include",
         });
@@ -43,7 +43,7 @@ export default function Cart() {
 
   const handleUpdateQuantity = async (slug, newQuantity) => {
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/carts/update", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/carts/update", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -65,7 +65,7 @@ export default function Cart() {
 
   const handleRemoveItem = async (slug) => {
     try {
-      const res = await fetch(`https://my-80store-backend.vercel.app/carts/${slug}`, {
+      const res = await fetch(`https://my-80store-backend.vercel.app/api/carts/${slug}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -87,7 +87,7 @@ export default function Cart() {
 
   const handleEmptyCart = async () => {
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/carts/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/carts/", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -172,7 +172,10 @@ export default function Cart() {
                 <ShoppingCartCheckoutTwoTone style={{ fontSize: 22 }} />
                 Got to order
               </button>
-              <button className={`btn ${styles.emptyBtn}`} onClick={() => setConfirmationMessage("Are you sure to empty your cart?")}>
+              <button
+                className={`btn ${styles.emptyBtn}`}
+                onClick={() => setConfirmationMessage("Are you sure to empty your cart?")}
+              >
                 <DeleteForeverTwoTone style={{ color: "red", fontSize: 18 }} />
                 Empty cart
               </button>
@@ -180,7 +183,9 @@ export default function Cart() {
           </div>
         )}
       </div>
-      {message && <Alert title="Info" onClose={() => setMessage("")} content={message} color="var(--dark-blue)" autoClose />}
+      {message && (
+        <Alert title="Info" onClose={() => setMessage("")} content={message} color="var(--dark-blue)" autoClose />
+      )}
       {confirmationMessage && (
         <ConfirmationModal
           title="Confirmation"

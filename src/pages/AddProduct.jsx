@@ -95,11 +95,19 @@ export default function AddProduct() {
       setErrorMessage("");
 
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/products/", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/products/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
-          body: JSON.stringify({ name, brand, description, price, category, stock, imageUrls: images.filter((img) => img.trim() !== "") }),
+          body: JSON.stringify({
+            name,
+            brand,
+            description,
+            price,
+            category,
+            stock,
+            imageUrls: images.filter((img) => img.trim() !== ""),
+          }),
         });
         if (res.ok) {
           const data = await res.json();
@@ -245,7 +253,10 @@ export default function AddProduct() {
                       onChange={(e) => handleImageChange(index, e.target.value)}
                     />
                     <div className={`btn ${styles.button} ${styles.deleteBtn}`}>
-                      <DeleteForever onClick={() => removeImageField(index)} style={{ color: "red", fontSize: "18px" }} />
+                      <DeleteForever
+                        onClick={() => removeImageField(index)}
+                        style={{ color: "red", fontSize: "18px" }}
+                      />
                     </div>
                   </div>
                 </div>

@@ -13,7 +13,7 @@ export default function Purchases() {
   useEffect(() => {
     const fetchPurchases = async () => {
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/orders/paid", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/orders/paid", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -37,7 +37,7 @@ export default function Purchases() {
 
   const handleReorder = async (orderId) => {
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/carts/reorder", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/carts/reorder", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -68,7 +68,9 @@ export default function Purchases() {
             {purchases.map((purchase) => (
               <div key={purchase._id} className={styles.purchase}>
                 <p className={styles.purchaseId}>Order ID: {purchase._id}</p>
-                <p className={styles.purchaseDate}>Purchased on {format(new Date(purchase.updatedAt), "EEEE dd MMMM yyyy 'at' h:mm a")}</p>
+                <p className={styles.purchaseDate}>
+                  Purchased on {format(new Date(purchase.updatedAt), "EEEE dd MMMM yyyy 'at' h:mm a")}
+                </p>
                 {purchase.items.map((item) => (
                   <div key={item.product._id} className={styles.item}>
                     <p>

@@ -6,7 +6,13 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, loginAndFetchCart } from "../store/userReducer";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { SentimentSatisfiedAltTwoTone, ShopTwoTwoTone, SettingsTwoTone, ShoppingCartTwoTone, LogoutTwoTone } from "@mui/icons-material";
+import {
+  SentimentSatisfiedAltTwoTone,
+  ShopTwoTwoTone,
+  SettingsTwoTone,
+  ShoppingCartTwoTone,
+  LogoutTwoTone,
+} from "@mui/icons-material";
 
 export default function Navbar() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -42,7 +48,7 @@ export default function Navbar() {
       setErrorMessageLog("");
 
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/users/login", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/users/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -57,7 +63,7 @@ export default function Navbar() {
               lastname: data.user.lastname,
               publicId: data.user.publicId,
               role: data.user.role,
-            })
+            }),
           );
           setEmailLog("");
           setPasswordLog("");
@@ -75,7 +81,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     setIsModalOpen(false);
     try {
-      await fetch("https://my-80store-backend.vercel.app/users/logout", {
+      await fetch("https://my-80store-backend.vercel.app/api/users/logout", {
         method: "POST",
         credentials: "include",
       });
@@ -104,12 +110,18 @@ export default function Navbar() {
         <Link to="/" className={`btn ${styles.link} ${location.pathname === "/" ? styles.activeLink : ""}`}>
           Home
         </Link>
-        <Link to="/products" className={`btn ${styles.link} ${location.pathname === "/products" ? styles.activeLink : ""}`}>
+        <Link
+          to="/products"
+          className={`btn ${styles.link} ${location.pathname === "/products" ? styles.activeLink : ""}`}
+        >
           {!isAdmin ? <>Products</> : <>Update Products</>}
         </Link>
         {isAdmin && (
           <>
-            <Link to="/addproduct" className={`btn ${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}>
+            <Link
+              to="/addproduct"
+              className={`btn ${styles.link} ${location.pathname === "/addproduct" ? styles.activeLink : ""}`}
+            >
               Add Product
             </Link>
           </>
@@ -209,7 +221,9 @@ export default function Navbar() {
                 <Link to="/connect" className={`btn ${styles.registerBtn}`} onClick={() => setIsLoginMenuOpen(false)}>
                   Register
                 </Link>
-                {errorMessageLog && <Alert title="Alert" onClose={() => setErrorMessageLog("")} content={errorMessageLog} color="red" />}
+                {errorMessageLog && (
+                  <Alert title="Alert" onClose={() => setErrorMessageLog("")} content={errorMessageLog} color="red" />
+                )}
               </div>
             )}
           </div>

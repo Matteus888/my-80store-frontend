@@ -54,7 +54,7 @@ export default function Connection() {
       setErrorMessage("");
 
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/users/register", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/users/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -70,7 +70,7 @@ export default function Connection() {
               publicId: data.user.publicId,
               role: data.user.role,
               cart: { items: [], totalPrice: 0 },
-            })
+            }),
           );
           setEmail("");
           setPassword("");
@@ -108,7 +108,7 @@ export default function Connection() {
       setErrorMessageLog("");
 
       try {
-        const res = await fetch("https://my-80store-backend.vercel.app/users/login", {
+        const res = await fetch("https://my-80store-backend.vercel.app/api/users/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -123,7 +123,7 @@ export default function Connection() {
               lastname: data.user.lastname,
               publicId: data.user.publicId,
               role: data.user.role,
-            })
+            }),
           );
           setEmailLog("");
           setPasswordLog("");

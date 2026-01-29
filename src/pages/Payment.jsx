@@ -22,14 +22,14 @@ export default function Payment() {
 
   useEffect(() => {
     setAlertMessage(
-      "This is an exercice website which doesn't really sell products. If you click on Payment, you can go to Stripe platform but don't use real credit card number. You can use this test credit card number 4242 4242 4242 4242 to complete a fake payment."
+      "This is an exercice website which doesn't really sell products. If you click on Payment, you can go to Stripe platform but don't use real credit card number. You can use this test credit card number 4242 4242 4242 4242 to complete a fake payment.",
     );
 
     const fetchOrder = async () => {
       if (!orderId) return;
 
       try {
-        const res = await fetch(`https://my-80store-backend.vercel.app/orders/${orderId}`, {
+        const res = await fetch(`https://my-80store-backend.vercel.app/api/orders/${orderId}`, {
           method: "GET",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ export default function Payment() {
     if (!orderId) return;
 
     try {
-      const res = await fetch("https://my-80store-backend.vercel.app/payments/", {
+      const res = await fetch("https://my-80store-backend.vercel.app/api/payments/", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

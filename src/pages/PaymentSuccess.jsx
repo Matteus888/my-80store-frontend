@@ -27,7 +27,7 @@ export default function PaymentSuccess() {
       console.log("Session ID:", sessionId);
       if (sessionId) {
         try {
-          const res = await fetch(`https://my-80store-backend.vercel.app/payments/verify-session/${sessionId}`, {
+          const res = await fetch(`https://my-80store-backend.vercel.app/api/payments/verify-session/${sessionId}`, {
             method: "GET",
             credentials: "include",
           });
