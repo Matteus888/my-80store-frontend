@@ -17,7 +17,7 @@ export default function Profile() {
       try {
         const res = await fetch("https://my-80store-backend.vercel.app/api/users?action=me", {
           method: "GET",
-          headers: { "Content-Type": "application/json" },
+          // headers: { "Content-Type": "application/json" },
           credentials: "include",
         });
         if (!res.ok) {
