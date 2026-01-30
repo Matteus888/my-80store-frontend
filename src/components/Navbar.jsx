@@ -76,23 +76,6 @@ export default function Navbar() {
         setEmailLog("");
         setPasswordLog("");
         navigate(data.user.role === "admin" ? "/addProduct" : "/");
-
-        // if (res.ok) {
-        //   const data = await res.json();
-        //   dispatch(
-        //     loginAndFetchCart({
-        //       firstname: data.user.firstname,
-        //       lastname: data.user.lastname,
-        //       publicId: data.user.publicId,
-        //       role: data.user.role,
-        //     }),
-        //   );
-        //   setEmailLog("");
-        //   setPasswordLog("");
-        //   navigate(data.user.role === "admin" ? "/addProduct" : "/");
-        // } else {
-        //   setErrorMessageLog("Invalid credentials");
-        // }
       } catch (error) {
         console.error("Error during login:", error);
         setErrorMessageLog("Unable to connect to the server. Please try again later.");
